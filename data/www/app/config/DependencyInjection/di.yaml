@@ -1,0 +1,17 @@
+services:
+#  salut:
+#    class: 'App\Salut'
+#    parameters:
+#      $d: '@bonjour'
+#      $b: 'b'
+#      $a: '@truc'
+#      $c: 'c'
+#
+#  truc:
+#    class: 'App\Truc'
+#    parameters:
+#      $a: 'a'
+#      $b: '@bonjour'
+#
+#  bonjour:
+#    class: 'App\Bonjour'
