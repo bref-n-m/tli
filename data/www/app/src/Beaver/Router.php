@@ -7,6 +7,7 @@ use Beaver\Request\Request;
 class Router
 {
     const URL_SEPARATOR = '/';
+    const PARAMETER_DELIMITER = ':';
 
     /** @var array */
     private $routes;
@@ -22,15 +23,18 @@ class Router
     /**
      * @param Request $request
      *
-     * @return string
+     * @return Route
      *
      * @throws \Exception
      */
-    public function getRoute(Request $request): string
+    public function getRoute(Request $request): Route
     {
         foreach ($this->routes['routes'] as $route) {
-            if ($this->match($request, $route)) {
-                return $route['controller'];
+            if (false !== $parameters = $this->match($request, $route)) {
+                return new Route(
+                    $route['controller'],
+                    $parameters
+                );
             }
         }
 
@@ -38,17 +42,61 @@ class Router
     }
 
     /**
+     * If the route matches, the array containing the parameters is returned, empty array otherwise
+     *
      * @param Request $request
      *
      * @param array $route
      *
-     * @return bool
+     * @return array|bool
      */
-    private function match(Request $request, array $route): bool
+    private function match(Request $request, array $route)
     {
-        if (ltrim($route['path'], self::URL_SEPARATOR) === $request->getPath()) {
-            return true;
+        // prepare regex
+        $regex = str_replace(
+            self::URL_SEPARATOR,
+            '\\'.self::URL_SEPARATOR,
+            $route['path']
+        );
+
+        // get parameters order & replace every parameter by its regex
+        $parametersOrder = [];
+        if (key_exists('parameters', $route)) {
+            foreach ($route['parameters'] as $parameter => $value) {
+                $order = strpos($regex, self::PARAMETER_DELIMITER.$parameter);
+                $parametersOrder[$order] = $parameter;
+            }
+
+            foreach ($route['parameters'] as $parameter => $value) {
+                $regex = str_replace(
+                    self::PARAMETER_DELIMITER.$parameter,
+                    "($value)",
+                    $regex
+                );
+            }
         }
-        return false;
+
+        $match = preg_match(
+            "/^$regex$/",
+            self::URL_SEPARATOR.$request->getPath(),
+            $parameters
+        );
+        return 0 === $match ? false : $this->buildParametersArray($parametersOrder, $parameters);
+    }
+
+    /**
+     * @param array $parametersOrder
+     * @param $orderedParameters
+     *
+     * @return array
+     */
+    private function buildParametersArray(array $parametersOrder, $orderedParameters): array
+    {
+        $parameters = [];
+        $i = 1;
+        foreach ($parametersOrder as $parameterName) {
+            $parameters[$parameterName] = $orderedParameters[$i++];
+        }
+        return $parameters;
     }
 }

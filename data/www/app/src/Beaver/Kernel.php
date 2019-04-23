@@ -55,17 +55,28 @@ class Kernel
      */
     public function handle(Request $request)
     {
-        $route = explode('::', $this->router->getRoute($request));
-        $controller = $route[0];
-        $action = $route[1];
+        /** @var Route $route */
+        $route = $this->router->getRoute($request);
 
-        $reflector = new ReflectionClass($controller);
+        $reflector = new ReflectionClass($route->getController());
         /** @var AbstractController $controllerInstance */
         $controllerInstance = $reflector->newInstanceArgs([
             $this->container
         ]);
 
-        return new Response($controllerInstance->$action());
+        $action = $route->getAction();
+
+        // prepare parameters
+        $methodParameters = $reflector->getMethod($action)->getParameters();
+        $orderedParameters = [];
+        foreach ($methodParameters as $parameter) {
+            $orderedParameters[] = $route->getParameters()[$parameter->getName()];
+        }
+
+        return $reflector->getMethod($action)->invokeArgs(
+            $controllerInstance,
+            $orderedParameters
+        );
     }
 
     private function loadDependencyInjectionConfig()
