@@ -47,7 +47,7 @@ class Container
      */
     private function findInstance(string $serviceName)
     {
-        return in_array($serviceName, $this->instances) ? $this->instances[$serviceName] : null;
+        return key_exists($serviceName, $this->instances) ? $this->instances[$serviceName] : null;
     }
 
     /**
