@@ -1,0 +1,11 @@
+routes:
+  index:
+    path: '/'
+    controller: 'App\Controller\DefaultController::index'
+
+  complex:
+    path: '/some/complex/route/:id-:slug'
+    controller: 'App\Controller\DefaultController::complex'
+    parameters:
+      slug: '[a-zA-Z\-]+'
+      id: '\d+'
