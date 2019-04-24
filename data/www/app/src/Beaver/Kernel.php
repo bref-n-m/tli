@@ -12,6 +12,7 @@ class Kernel
     const CONFIG_DIRECTORY = 'config'.DIRECTORY_SEPARATOR;
     const DEPENDENCY_INJECTION_DIRECTORY = self::CONFIG_DIRECTORY.'DependencyInjection'.DIRECTORY_SEPARATOR;
     const ROUTING_DIRECTORY = self::CONFIG_DIRECTORY.'Routing'.DIRECTORY_SEPARATOR;
+    const TEMPLATES_DIRECTORY = 'src'.DIRECTORY_SEPARATOR.'App'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR;
 
     /** @var string  */
     private $path;
@@ -21,6 +22,9 @@ class Kernel
 
     /** @var Router */
     private $router;
+
+    /** @var \Twig\Environment  */
+    private $twig;
 
     /**
      * Kernel constructor.
@@ -38,6 +42,9 @@ class Kernel
 
         // load di config
         $this->loadDependencyInjectionConfig();
+
+        // load twig config
+        $this->twig = $this->loadTwigConfig();
 
         // router
         $this->router = $this->container->resolve('router');
@@ -61,7 +68,8 @@ class Kernel
         $reflector = new ReflectionClass($route->getController());
         /** @var AbstractController $controllerInstance */
         $controllerInstance = $reflector->newInstanceArgs([
-            $this->container
+            $this->container,
+            $this->twig
         ]);
 
         $action = $route->getAction();
@@ -120,5 +128,13 @@ class Kernel
             }
         }
         return $config;
+    }
+
+    private function loadTwigConfig()
+    {
+        $twigEnvironment = new TwigLoader([
+            $this->path.self::TEMPLATES_DIRECTORY,
+        ]);
+        return $twigEnvironment->getTwig();
     }
 }
