@@ -7,5 +7,5 @@ routes:
     path: '/some/complex/route/:id-:slug'
     controller: 'App\Controller\DefaultController::complex'
     parameters:
-      id: '\d+'
       slug: '[a-zA-Z\-]+'
+      id: '\d+'

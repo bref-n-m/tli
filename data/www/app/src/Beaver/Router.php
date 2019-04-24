@@ -20,6 +20,28 @@ class Router
         $this->routes = $routes;
     }
 
+    public function generatePath(string $pathName, array $parameters = []): string
+    {
+        foreach ($this->routes['routes'] as $name => $route) {
+            if ($name === $pathName) {
+                $path = $route['path'];
+
+                // populate params in path
+                foreach ($route['parameters'] as $parameterName => $parameterValue) {
+                    $path = str_replace(
+                        self::PARAMETER_DELIMITER.$parameterName,
+                        $parameters[$parameterName],
+                        $path
+                    );
+                }
+
+                return $path;
+            }
+        }
+
+        throw new \Exception("Could not generate route for $pathName");
+    }
+
     /**
      * @param Request $request
      *
@@ -66,6 +88,7 @@ class Router
                 $order = strpos($regex, self::PARAMETER_DELIMITER.$parameter);
                 $parametersOrder[$order] = $parameter;
             }
+            ksort($parametersOrder);
 
             foreach ($route['parameters'] as $parameter => $value) {
                 $regex = str_replace(
