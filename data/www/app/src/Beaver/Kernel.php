@@ -43,12 +43,12 @@ class Kernel
         // load di config
         $this->loadDependencyInjectionConfig();
 
-        // load twig config
-        $this->twig = $this->loadTwigConfig();
-
         // router
         $this->router = $this->container->resolve('router');
         $this->loadRoutingConfig();
+
+        // load twig config
+        $this->twig = $this->loadTwigConfig();
     }
 
     /**
@@ -132,9 +132,10 @@ class Kernel
 
     private function loadTwigConfig()
     {
-        $twigEnvironment = new TwigLoader([
-            $this->path.self::TEMPLATES_DIRECTORY,
-        ]);
+        $twigEnvironment = new TwigLoader(
+            [$this->path.self::TEMPLATES_DIRECTORY],
+            $this->router
+        );
         return $twigEnvironment->getTwig();
     }
 }
