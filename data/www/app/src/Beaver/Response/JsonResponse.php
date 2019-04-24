@@ -13,7 +13,7 @@ class JsonResponse extends Response
     public function __construct(array $array, int $status = self::HTTP_OK)
     {
         parent::__construct(
-            json_encode($array),
+            json_encode($array, JSON_UNESCAPED_SLASHES),
             $status
         );
     }
