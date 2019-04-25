@@ -8,7 +8,7 @@ services:
   service_salut: # Nom du service
     class: 'App\Salut'
     parameters: # Correspond aux paramètres du constructeur de la classe App\Salut
-      $serviceBonjour: '@bonjour'
+      $serviceBonjour: '@nom_service_bonjour'
       $aParam: 'b'
       $serviceTruc: '@truc'
       $anOtherParam: 'c'
@@ -17,7 +17,7 @@ services:
     class: 'App\Truc'
     parameters:
       $a: 'a'
-      $b: '@bonjour'
+      $b: '@nom_service_bonjour'
 
   nom_service_bonjour:
     class: 'App\Bonjour'
