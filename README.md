@@ -1,9 +1,11 @@
 # Projet TLI
 
-* [Injection de dépendance](https://github.com/bref-n-m/tli/blob/develop/README.md#injection-de-d%C3%A9pendance)
-  * [Classe correspondant au service `rs6`](https://github.com/bref-n-m/tli/blob/develop/README.md#classe-correspondant-au-service-rs6)
-* [Routing](https://github.com/bref-n-m/tli/blob/develop/README.md#routing)
-* [Twig](https://github.com/bref-n-m/tli/blob/develop/README.md#twig)
+* [Injection de dépendance](#injection-de-d%C3%A9pendance)
+  * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
+* [Routing](#routing)
+* [Controllers](#controllers)
+  * [Récupération des paramètres]()
+* [Twig](#twig)
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
@@ -91,6 +93,8 @@ class Voiture
 On voit donc que si on souhaite créer une `Voiture` avec d'autres paramètres, il suffit de créer un nouveau service.
 
 ## Routing
+Pour gérer le routing de l'application, un fichier de configuration est nécessaire. Il suit la forme suivante:
+
 ```yaml
 # /data/www/app/config/Routing/routes.yaml
 
@@ -103,9 +107,18 @@ routes:
     path: '/some/complex/route/:id-:slug'
     controller: 'App\Controller\DefaultController::complex'
     parameters:
-      slug: '[a-zA-Z\-]+'
-      id: '\d+'
+      slug: '[a-zA-Z\-]+' # au moins une lettre minuscule ou majuscule ou caractère -
+      id: '\d+' # au moins un chiffre
 ```
+
+Chaque route est identifiée par son nom `index` et `complex` dans l'exemple.
+
+| Clé | Description |
+|:---:| ----------- |
+| `path` | Donne l'`uri` de la route |
+| `controller` | Une route correspond à une méthode d'un controller. Ainsi, la valeur `App\Controller\DefaultController::index`, précise que la méthode `index` de la classe `App\Controller\DefaultController`, sera utilisé pour la route en question. |
+| `parameters` | Une route peut prendre des paramètres, chaque paramètre est une expression régulière. Le site [regex 101](https://regex101.com/) permet de tester facilement vos expressions régulires.<br>Dans la clé `path`, les paramètres seront préfixés par `:`, exemple pour les paramètres `id` et `slug`: `path: '/some/complex/route/:id-:slug'`<br>Ces paramètres seront ensuite envoyés en paramètres à la méthode du controller, voir [récupération des paramètres]() |
+
 
 ## Controllers
 ```php
@@ -149,6 +162,8 @@ class DefaultController extends AbstractController
     }
 }
 ```
+
+### Récupération des paramètres
 
 ## Twig
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
