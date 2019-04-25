@@ -1,6 +1,7 @@
 # Projet TLI
 
 * [Injection de dépendance](https://github.com/bref-n-m/tli/blob/develop/README.md#injection-de-d%C3%A9pendance)
+  * [Classe correspondant au service `rs6`](https://github.com/bref-n-m/tli/blob/develop/README.md#classe-correspondant-au-service-rs6)
 * [Routing](https://github.com/bref-n-m/tli/blob/develop/README.md#routing)
 * [Twig](https://github.com/bref-n-m/tli/blob/develop/README.md#twig)
 
@@ -86,6 +87,8 @@ class Voiture
     }
 }
 ```
+
+On voit donc que si on souhaite créer une `Voiture` avec d'autres paramètres, il suffit de créer un nouveau service.
 
 ## Routing
 ```yaml
