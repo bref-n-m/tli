@@ -1,27 +1,54 @@
 # Projet TLI
 
 ## Injection de dépendance
+L'injection de dépendance c'est quoi ?
+
+> Il consiste à créer dynamiquement (injecter) les dépendances entre les différents objets en s'appuyant sur une description (fichier de configuration ou métadonnées) ou de manière programmatique.
+[Wikipédia](https://fr.wikipedia.org/wiki/Injection_de_d%C3%A9pendances)
+
+Avec un exemple:
+
+On à une classe `Voiture`, à partir de cette classe qui prend en paramètres de sont constructeur:
+* $moteur de type `App\Moteur`
+* $roues de type `App\Roues`
+* $marque de type `string`
+* $marque de modele `string`
+
+A partir de cette classe on veut définir une `RS6`, pour ce faire on utilise le fichier de configuration suivant:
+
 ```yaml
 # /data/www/app/config/DependencyInjection/di.yaml
 
 services:
-  service_salut: # Nom du service
-    class: 'App\Salut'
-    parameters: # Correspond aux paramètres du constructeur de la classe App\Salut
-      $serviceBonjour: '@nom_service_bonjour'
-      $aParam: 'b'
-      $serviceTruc: '@truc'
-      $anOtherParam: 'c'
-
-  truc:
-    class: 'App\Truc'
+  rs6:
+    class: 'App\Voiture'
     parameters:
-      $a: 'a'
-      $b: '@nom_service_bonjour'
+      $moteur: '@v8' # on veut injecter le service v8
+      $roues: '@18pouces' # on veut injecter le service 18pouces
+      $marque: 'Audi'
+      $modele: 'RS6'
 
-  nom_service_bonjour:
-    class: 'App\Bonjour'
+  v8:
+    class: 'App\V8' # App\V8 étend de App\Moteur
+    parameters:
+      $vis: '@ecrou'
+
+  18pouces:
+    class: 'App\18Pouces' # App\V8 étend de App\Roues
+    parameters:
+      $vis: '@ecrou'
+      
+  ecrou:
+    class: 'App\ecrou'
+    parameters:
+      $longueur: '20'
 ```
+
+Ainsi, quand on voudra récuperer le service `rs6`, le système d'injection de dépendance utilisera la configuration définie pour passer au constructeur les bons paramètres.
+
+Les paramètres sont définis sous la clé `parameters`.
+
+Pour injecter un autre service, on le préfixera d'un `@`.
 
 ### Classe correspondant au service `sercice_salut`
 ```php
