@@ -54,39 +54,35 @@ Les paramètres sont définis sous la clé `parameters`.
 
 Pour injecter un autre service, on le préfixera d'un `@`.
 
-### Classe correspondant au service `sercice_salut`
+### Classe correspondant au service `rs6`
 ```php
-
-# /data/www/app/src/App/Salut.php
+# /data/www/app/src/App/Voiture.php
 
 <?php
 
 namespace App;
 
-use App\Bonjour;
-use App\Truc;
+use App\Moteur;
+use App\Roues;
 
-class Salut
+class Voiture
 {
-    /** @var Truc */
-    private $serviceTruc;
+    /** @var Moteur */
+    private $serviceMoteur;
     
-    /** @var string */
-    private $aParam;
+    /** @var Roues */
+    private $serviceRoues;
 
     /** @var string */
-    private $anOtherParam;
+    private $marque;
 
-    /** @var Bonjour */
-    private $serviceBonjour;
+    /** @var string */
+    private $modele;
     
-    public function __construct(Truc $serviceTruc, string $aParam, string $anOtherParam, Bonjour $serviceBonjour)
+    public function __construct(Moteur $serviceMoteur, Roues $serviceRoues, string $marque, string $modele)
     {
-        $this->serviceTruc = $serviceTruc;
-        $this->aParam = $aParam;
-        $this->anOtherParam = $anOtherParam;
-        $this->serviceBonjour = $serviceBonjour;
-
+        $this->serviceMoteur = $serviceMoteur;
+        // ...
     }
 }
 ```
