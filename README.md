@@ -5,13 +5,13 @@
 # /data/www/app/config/DependencyInjection/di.yaml
 
 services:
-  salut:
+  service_salut: # Nom du service
     class: 'App\Salut'
-    parameters:
-      $d: '@bonjour'
-      $b: 'b'
-      $a: '@truc'
-      $c: 'c'
+    parameters: # Correspond aux paramètres du constructeur de la classe App\Salut
+      $serviceBonjour: '@bonjour'
+      $aParam: 'b'
+      $serviceTruc: '@truc'
+      $anOtherParam: 'c'
 
   truc:
     class: 'App\Truc'
@@ -19,8 +19,45 @@ services:
       $a: 'a'
       $b: '@bonjour'
 
-  bonjour:
+  nom_service_bonjour:
     class: 'App\Bonjour'
+```
+
+### Classe correspondant au service `sercice_salut`
+```php
+
+# /data/www/app/src/App/Controller/DefaultController.php
+
+<?php
+
+namespace App;
+
+use App\Bonjour;
+use App\Truc;
+
+class Salut
+{
+    /** @var Truc */
+    private $serviceTruc;
+    
+    /** @var string */
+    private $aParam;
+
+    /** @var string */
+    private $anOtherParam;
+
+    /** @var Bonjour */
+    private $serviceBonjour;
+    
+    public function __construct(Truc $serviceTruc, string $aParam, string $anOtherParam, Bonjour $serviceBonjour)
+    {
+        $this->serviceTruc = $serviceTruc;
+        $this->aParam = $aParam;
+        $this->anOtherParam = $anOtherParam;
+        $this->serviceBonjour = $serviceBonjour;
+
+    }
+}
 ```
 
 ## Routing
@@ -48,6 +85,7 @@ routes:
 
 namespace App\Controller;
 
+use App\Salut;
 use Beaver\Controller\AbstractController;
 use Beaver\Response\JsonResponse;
 use Beaver\Response\Response;
@@ -64,6 +102,9 @@ class DefaultController extends AbstractController
 
     public function complex(string $slug, int $id)
     {
+        /** @var Salut */
+        $serviceSalut = $this->get('sercice_salut'); // Récupération du service 'service_salut'
+        
         /** @var Router $router */
         $router = $this->get('router');
 
