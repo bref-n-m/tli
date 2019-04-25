@@ -26,7 +26,7 @@ services:
 ### Classe correspondant au service `sercice_salut`
 ```php
 
-# /data/www/app/src/App/Controller/DefaultController.php
+# /data/www/app/src/App/Salut.php
 
 <?php
 
@@ -123,7 +123,7 @@ class DefaultController extends AbstractController
 ## Twig
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
 
-Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisés:
+Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisées:
 * `asset()` :arrow_right: pour charger les fichiers statiques présent dans `/data/www/app/public/`
 * `path()` :arrow_right: pour créer un lien vers une action
 
