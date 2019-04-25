@@ -1,5 +1,9 @@
 # Projet TLI
 
+* [Injection de dépendance](https://github.com/bref-n-m/tli/blob/develop/README.md#injection-de-d%C3%A9pendance)
+* [Routing](https://github.com/bref-n-m/tli/blob/develop/README.md#routing)
+* [Twig](https://github.com/bref-n-m/tli/blob/develop/README.md#twig)
+
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
 
@@ -12,7 +16,7 @@ On à une classe `Voiture`, à partir de cette classe qui prend en paramètres d
 * $moteur de type `App\Moteur`
 * $roues de type `App\Roues`
 * $marque de type `string`
-* $marque de modele `string`
+* $modele de modele `string`
 
 A partir de cette classe on veut définir une `RS6`, pour ce faire on utilise le fichier de configuration suivant:
 
