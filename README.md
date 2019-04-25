@@ -12,13 +12,13 @@ L'injection de dépendance c'est quoi ?
 
 Avec un exemple:
 
-On à une classe `Voiture`, à partir de cette classe qui prend en paramètres de sont constructeur:
+On à une classe `Voiture`, cette classe prend en paramètres de son constructeur:
 * $moteur de type `App\Moteur`
 * $roues de type `App\Roues`
 * $marque de type `string`
-* $modele de modele `string`
+* $modele de type `string`
 
-A partir de cette classe on veut définir une `RS6`, pour ce faire on utilise le fichier de configuration suivant:
+A partir de cette classe on veut définir un service `RS6`, pour ce faire on utilise le fichier de configuration suivant:
 
 ```yaml
 # /data/www/app/config/DependencyInjection/di.yaml
