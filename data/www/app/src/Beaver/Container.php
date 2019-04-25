@@ -72,7 +72,7 @@ class Container
         }
 
         $constructor = $reflector->getConstructor();
-        if (null === $constructor) {
+        if (null === $constructor || empty($constructor->getParameters())) {
             $instance = $reflector->newInstance();
             // save the instance
             $this->instances[$serviceName] = $instance;

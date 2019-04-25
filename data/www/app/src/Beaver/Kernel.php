@@ -121,12 +121,13 @@ class Kernel
                     continue;
                 }
 
-                $config = array_merge(
+                $config = array_merge_recursive(
                     $config,
                     yaml_parse_file($configDirectory.$file)
                 );
             }
         }
+
         return $config;
     }
 
