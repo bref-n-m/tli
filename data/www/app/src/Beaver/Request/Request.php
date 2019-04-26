@@ -4,31 +4,14 @@ namespace Beaver\Request;
 
 class Request
 {
-    /** @var string */
-    private $httpMethod;
-
-    /** @var string */
-    private $path;
-
-    /** @var array */
-    private $post;
-
-    /**
-     * Request constructor.
-     */
-    public function __construct()
-    {
-        $this->httpMethod = $_SERVER['REQUEST_METHOD'];
-        $this->path = key_exists('path', $_GET) ? $_GET['path'] : '';
-        $this->post = $_POST;
-    }
+    const POST = 'POST';
 
     /**
      * @return string
      */
     public function getHttpMethod(): string
     {
-        return $this->httpMethod;
+        return $_SERVER['REQUEST_METHOD'];
     }
 
     /**
@@ -36,7 +19,17 @@ class Request
      */
     public function getPath(): string
     {
-        return $this->path;
+        return key_exists('path', $_GET) ? $_GET['path'] : '';
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    public function getPostValue(string $key)
+    {
+        return array_key_exists($key, $_POST) ? $_POST[$key] : null;
     }
 
     /**
@@ -44,8 +37,19 @@ class Request
      *
      * @return array
      */
-    public function getPost(string $key): array
+    public function getSessionValue(string $key)
     {
-        return $this->post[$key];
+        return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : null;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     *
+     * @return string
+     */
+    public function setSessionValue(string $key, string $value): string
+    {
+        $_SESSION[$key] = $value;
     }
 }

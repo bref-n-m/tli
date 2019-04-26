@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Beaver\Controller\AbstractController;
 use Beaver\Response\JsonResponse;
-use Beaver\Response\Response;
 use Beaver\Router;
 
 class DefaultController extends AbstractController

@@ -69,7 +69,8 @@ class Kernel
         /** @var AbstractController $controllerInstance */
         $controllerInstance = $reflector->newInstanceArgs([
             $this->container,
-            $this->twig
+            $this->twig,
+            $request
         ]);
 
         $action = $route->getAction();

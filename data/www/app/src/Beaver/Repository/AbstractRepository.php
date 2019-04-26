@@ -154,4 +154,14 @@ abstract class AbstractRepository
 
         return $reflector;
     }
+
+    /**
+     * @param array $objects
+     *
+     * @return mixed|null
+     */
+    protected function getOne(array $objects)
+    {
+        return !$objects ? null : $objects[0];
+    }
 }

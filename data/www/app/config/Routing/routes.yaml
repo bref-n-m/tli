@@ -9,3 +9,7 @@ routes:
     parameters:
       slug: '[a-zA-Z\-]+'
       id: '\d+'
+
+  register:
+    path: '/register'
+    controller: 'App\Controller\UserController::register'
