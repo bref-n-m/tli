@@ -76,22 +76,22 @@ abstract class AbstractRepository
     /**
      * Get entities from idS, idP or idK
      *
-     * @param string $type
-     * @param int $id
+     * @param string $columnName
+     * @param $value
      *
      * @return array|null
      *
      * @throws \ReflectionException
      */
-    protected function getByRow(string $type, int $id): ?array
+    protected function getByRow(string $columnName, $value): array
     {
         $res = [];
         $stmt = $this->db->prepare('
             SELECT *
             FROM `' . $this->tableName . '`
-            WHERE `'. $type .'` = :'. $type .'
+            WHERE `'. $columnName .'` = :'. $columnName .'
         ');
-        $stmt->execute([$type => $id]);
+        $stmt->execute([$columnName => $value]);
 
         $reflector = $this->getReflector();
 
@@ -103,40 +103,40 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param array $ids => ['idS' => ... , 'idP' => ..., ...]
-     * @param array $types => ['idS', 'idP', ...]
+     * @param array $columns => ['columnName' => value , ...] -> i.e : ['idK' => 12 , 'idS' => 13]
      *
-     * @return object|null
+     * @return array|null
      *
      * @throws \ReflectionException
      */
-    public function getByRows(array $ids, array $types)
+    public function getByRows(array $columns): array
     {
+        if (!$columns) {
+            throw new \Exception('$columns shouldn\'t be empty or null');
+        }
+
         $query = 'SELECT * FROM `' . $this->tableName . '` WHERE ';
 
-        $queryParameters = [];
-        foreach ($types as $type) {
-            if (!key_exists($type, $ids)) {
-                throw new \Exception('$ids should contain all keys from $types');
-            }
-            $query .= ' `' . $type . '` = :' . $type;
+        foreach ($columns as $key => $value) {
+            $query .= ' `' . $key . '` = :' . $key;
 
             // Test if the current type is the last of $types
-            if (end($types) != $type) {
+            if (end($columns) != $columns[$key]) {
                 $query .= ' and';
             }
-
-            $queryParameters[$type] = $ids[$type];
         }
 
         $stmt = $this->db->prepare($query);
-
-        $stmt->execute($queryParameters);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute($columns);
 
         $reflector = $this->getReflector();
 
-        return $row ? $reflector->newInstanceArgs($row) : null;
+        $res = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $res[] = $reflector->newInstanceArgs($row);
+        }
+
+        return $res;
     }
 
     /**
