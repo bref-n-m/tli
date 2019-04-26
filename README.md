@@ -3,6 +3,7 @@
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
+  * [Service de routing](#service-de-routing)
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
 * [Twig](#twig)
@@ -119,6 +120,19 @@ Chaque route est identifiée par son nom `index` et `complex` dans l'exemple.
 | `controller` | Une route correspond à une méthode d'un controller. Ainsi, la valeur `App\Controller\DefaultController::index`, précise que la méthode `index` de la classe `App\Controller\DefaultController`, sera utilisé pour la route en question. |
 | `parameters` | Une route peut prendre des paramètres, chaque paramètre est une expression régulière. Le site [regex 101](https://regex101.com/) permet de tester facilement vos expressions régulires.<br>Dans la clé `path`, les paramètres seront préfixés par `:`, exemple pour les paramètres `id` et `slug`: `path: '/some/complex/route/:id-:slug'`<br>Ces paramètres seront ensuite envoyés en paramètres à la méthode du controller, voir [récupération des paramètres](#récupération-des-paramètres) |
 
+### Service de routing
+
+Un service de routing appelé `router` permet de générer des `uri` vers les actions de l'application, par le biais de la méthode `generatePath(...)`. Cette méthode prend en premier paramètre, le nom de la route, et en second, un tableau correspondant aux paramètres de celle-ci. Voir l'exemple ci-dessous.
+
+```php
+/** @var Router $router */
+$router = $this->get('router'); // recupération du service router.
+
+$uri = $router->generatePath('complex', [
+  'id'   => 123,
+  'slug' => 'salut-ca-va',
+]);
+```
 
 ## Controllers
 ```php
