@@ -184,6 +184,8 @@ class DefaultController extends AbstractController
 
 ### Récupération des paramètres
 
+Les paramètres sont récupérés par une action en paramètres, ex: `public function complex(string $slug, int $id)`.
+
 ## Twig
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
 
