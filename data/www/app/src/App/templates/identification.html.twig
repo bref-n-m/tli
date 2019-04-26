@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h3> Identification </h3>
+<form method="post" action="./index.php" class="connexion">
+    <label for="identifiant">
+        Identifiant :
+        <br />
+        <input tabindex="1" type="text" aname="identifiant" id="identifiant" />
+    </label>
+    <br />
+    <br />
+    <label for="mot_de_passe">
+        Mot de passe :
+        <br />
+        <input tabindex="2" type="password" name="mot_de_passe" id="mot_de_passe" />
+    </label>
+    <br />
+    <br />
+    <input tabindex="3" type="submit" name="valider" value="Valider" />
+    <input tabindex="4" type="reset" name="reinitialiser" value="Réinitialiser" />
+</form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1> Pathologie </h1>
+<!--TODO : Remplir les select avec des requêtes sql-->
+    <div class="card">
+        <div class="card-header">
+            Meridien
+        </div>
+        <div class="card-body">
+            <form class="form">
+
+                <ul>
+                    <tr><input type="checkbox" name="meridien_list" value="Poumon">Poumon<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Ren Mai">Ren Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Rein">Rein<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
+                </ul>
+                <!--TODO : Créer une fonction JS pour le bouton-->
+                <input class="button info" type="submit" value="Recherche" />
+            </form>
+        </div>
+    </div>
+<!--TODO : Afficher les tableaux correspondant-->
+    <br>
+
+    <table>
+    <thead>
+    <tr>
+        <th> Meridien </th>
+        <th> Pathologie </th>
+        <th> Caractéristiques </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td> XXXXX </td>
+        <td> XXXXX </td>
+        <td> XXXXX </td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}

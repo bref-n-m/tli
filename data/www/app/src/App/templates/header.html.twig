@@ -2,14 +2,10 @@
     <a href="#" class="header_icon" id="header_icon"></a>
     <a href="{{ path('index') }}" class="header_logo"><img class="brand_icon" src="{{ asset('img/icon-acupuncture.png') }}" > Bref'n'm Acupuncture</a>
     <nav class="menu">
-{#
-        Elias inspire toi de cette ligne
         <a href={{ path('information') }}>Informations</a>
-#}
-        <a href="#">Informations</a>
-        <a href="#">Symptômes</a>
-        <a href="#">Pathologies</a>
-        <a href="#">Recherche de pathologies</a>
-        <a href="#">Se connecter</a>
+        <a href={{ path('symptomes') }}>Symptômes</a>
+        <a href={{ path('pathologie') }}>Pathologies</a>
+        <a href={{ path('recherche') }}>Recherche de pathologies</a>
+        <a href={{ path('connection') }}>Se connecter</a>
     </nav>
 </header>
