@@ -26,6 +26,10 @@ class Router
             if ($name === $pathName) {
                 $path = $route['path'];
 
+                if(!isset($route['parameters'])) {
+                    return $path;
+                }
+
                 // populate params in path
                 foreach ($route['parameters'] as $parameterName => $parameterValue) {
                     $path = str_replace(
