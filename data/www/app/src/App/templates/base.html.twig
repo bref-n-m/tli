@@ -2,16 +2,19 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Bref'n'm Acupuncture</title>
+    <title>Bref'n'm Acupuncture - {% block title %}Accueil{% endblock %}</title>
     <!-- If module no zoom available -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
     <link rel="icon" type="image/x-icon" href={{ asset('img/icon-acupuncture.png') }}>
     <!-- Style Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- Style CSS Global -->
+    {% block css %}
     <link rel="stylesheet" type="text/css" href={{ asset('style/grid.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('style/header.css') }}>
     <link rel="stylesheet" type="text/css" href={{ asset('style/style.css') }}>
+    {% endblock %}
+
     <base href="/">
 </head>
     <body>
@@ -20,12 +23,15 @@
             <div class="site-pusher">
                 <div class="site-content">
                     <div class="container">
-                        {% include 'test.html.twig' %}
+                        {# Redifine this block in children #}
+                        {% block body %}
+                        {% endblock %}
                     </div>
                 </div>
+                <div class="site-cache" id="site-cache"></div>
             </div>
         </div>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src={{ asset('js/app.js') }}></script>
+        <script type="text/javascript" src={{ asset('js/app.js') }}></script>
     </body>
 </html>

@@ -1,12 +1,7 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ asset('style.css') }}">
-    </head>
-    <body>
-    {% include 'test.html.twig' %}
-    <p>Hi {{ name }}</p>
-    <p><a href="{{ path('complex', {'id': '12', 'slug': 'coucou'}) }}">Complex route</a></p>
-    <br>
-    <img src="https://banner2.kisspng.com/20180124/thw/kisspng-beaver-clip-art-hello-beaver-5a686ba614b066.0283876115167927420848.jpg">
-    </body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Information{% endblock %}
+
+{% block body %}
+    Exemple : {{ name }}
+{% endblock %}
