@@ -184,7 +184,7 @@ Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/te
 
 Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisées:
 * `asset()` :arrow_right: pour charger les fichiers statiques présent dans `/data/www/app/public/`
-* `path()` :arrow_right: pour créer un lien vers une action
+* `path()` :arrow_right: pour créer un lien vers une action (utilise le service `router`, voir [service de routing](#service-de-routing))
 
 Exemple d'utilisation de ces méthodes:
 ``` twig
