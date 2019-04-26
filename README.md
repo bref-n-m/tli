@@ -135,6 +135,14 @@ $uri = $router->generatePath('complex', [
 ```
 
 ## Controllers
+Les pages de notre application correspondent chacunes à une action d'un controller.
+
+Chaques action doit retourner un objet de type `Beaver\Response\Response`.
+
+La méthode `$this->render('template.html.twig', ['parameter' => 'lorem'] /* tableau à passer à twig */);` renvoit un objet `Beaver\Response\Response`. Elle peut donc être utilisée par une action pour rendre une template twig (voir l'exemple ci-après).
+
+Dans le cas de web service, vous pouvez renvoyer une `Beaver\Response\JsonResponse` (qui étend de `Beaver\Response\Response`) (voir l'exemple ci-après).
+
 ```php
 # /data/www/app/src/App/Controller/DefaultController.php
 
@@ -159,11 +167,8 @@ class DefaultController extends AbstractController
 
     public function complex(string $slug, int $id)
     {
-        /** @var Salut */
-        $serviceSalut = $this->get('sercice_salut'); // Récupération du service 'service_salut'
-        
         /** @var Router $router */
-        $router = $this->get('router');
+        $router = $this->get('router'); // Récupération du service 'router'
 
         return new JsonResponse([
             'id'    => $id,
