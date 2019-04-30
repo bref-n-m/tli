@@ -3,7 +3,7 @@
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
-  * [Route de fallback (404)](#Route-de-fallback-(404))
+  * [Route de fallback (404)](#route-de-fallback-404)
   * [Service de routing](#service-de-routing)
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
