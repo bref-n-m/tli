@@ -72,6 +72,18 @@ table.table td.center {
 }
 
 /* Titres */
+h1{
+    margin: 0.6rem 0.8rem;
+    font-size: 1.5em;
+}
+h2{
+    margin: 0.5rem 0.8rem;
+    font-size: 1.3em;
+}
+h3{
+    margin: 0.4rem 0.8rem;
+    font-size: 1.1em;
+}
 
 /* Blocs */
 .card{
