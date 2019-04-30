@@ -1,0 +1,25 @@
+version: '3'
+services:
+  serveur-php:
+    build: ./services/php-apache/
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/www/app:/var/www/html/
+  mysql:
+    build: ./services/db/
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tli
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - "3306:3306"
+  myadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+        PMA_USER: root
+        PMA_PASSWORD: root
+        PMA_HOST: mysql
+    ports:
+      - "8080:80"

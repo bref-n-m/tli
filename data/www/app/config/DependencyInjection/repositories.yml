@@ -2,9 +2,9 @@ services:
     database:
         class: 'Beaver\Repository\Database'
         parameters:
-            $dsn: 'mysql:host=localhost;dbname=test;charset=utf8'
-            $username: 'admin'
-            $password: 'admin'
+            $dsn: 'mysql:host=mysql;dbname=tli;charset=utf8'
+            $username: 'root'
+            $password: 'root'
 
     repository.symptom:
         class: 'App\Repository\SymptomRepository'
