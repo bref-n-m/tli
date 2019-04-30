@@ -4,12 +4,12 @@
     --bloc-border-color: #597ccc;
     --bloc-background-color: #FFF;
 
-    --buttun-black-color: #212529;
-    --buttun-white-color: #FFF;
+    --button-black-color: #212529;
+    --button-white-color: #FFF;
 }
 
 /* Bouton */
-button {
+.button {
     margin: .375rem .75rem;
     padding: .375rem .75rem;
     font-size: 1rem;
@@ -19,30 +19,30 @@ button {
     overflow: visible;
     min-width: 6rem;
 }
-.success {
-    color: var(--buttun-white-color);
+.button.success {
+    color: var(--button-white-color);
     background-color: #28a745;
 
 }
-.danger {
-    color: var(--buttun-white-color);
+.button.danger {
+    color: var(--button-white-color);
     background-color: #dc3545;
-    border-color: var(--buttun-black-color);
+    border-color: var(--button-black-color);
 }
-.warning{
-    color: var(--buttun-black-color);
+.button.warning{
+    color: var(--button-black-color);
     background-color: #ffc107;
 }
-.light {
-    color: var(--buttun-black-color);
+.button.light {
+    color: var(--button-black-color);
     background-color: #f8f9fa;
 }
-.info{
-    color: var(--buttun-white-color);
+.button.info{
+    color: var(--button-white-color);
     background-color: #597ccc;
 }
-.secondary{
-    color: var(--buttun-white-color);
+.button.secondary{
+    color: var(--button-white-color);
     background-color: #6c757d;
 }
 
@@ -68,7 +68,6 @@ button {
 .card-header, .card-footer{
     margin-bottom: 0;
     background-color: var(--bloc-background-HF-color);
-
 }
 
 /* Formulaires */
