@@ -1,0 +1,73 @@
+/* Base */
+:root {
+    --bloc-background-HF-color: #597ccc2e;
+    --bloc-border-color: #597ccc;
+    --bloc-background-color: #FFF;
+
+    --button-black-color: #212529;
+    --button-white-color: #FFF;
+}
+
+/* Bouton */
+.button {
+    margin: .375rem .75rem;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+
+    overflow: visible;
+    min-width: 6rem;
+}
+.button.success {
+    color: var(--button-white-color);
+    background-color: #28a745;
+
+}
+.button.danger {
+    color: var(--button-white-color);
+    background-color: #dc3545;
+    border-color: var(--button-black-color);
+}
+.button.warning{
+    color: var(--button-black-color);
+    background-color: #ffc107;
+}
+.button.light {
+    color: var(--button-black-color);
+    background-color: #f8f9fa;
+}
+.button.info{
+    color: var(--button-white-color);
+    background-color: #597ccc;
+}
+.button.secondary{
+    color: var(--button-white-color);
+    background-color: #6c757d;
+}
+
+/* Tableaux */
+
+/* Titres */
+
+/* Blocs */
+.card{
+    margin-bottom: 1.5rem;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--bloc-background-color);
+    background-clip: border-box;
+    border: 1px solid var(--bloc-border-color);
+    border-radius: .25rem;
+    border-bottom: 0;
+}
+.card-header, .card-footer, .card-body{
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid var(--bloc-border-color);
+}
+.card-header, .card-footer{
+    margin-bottom: 0;
+    background-color: var(--bloc-background-HF-color);
+}
+
+/* Formulaires */
