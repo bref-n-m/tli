@@ -1,4 +1,8 @@
 services:
+  user.manager:
+    class: 'App\Auth\UserManager'
+    parameters:
+      $userRepository: '@repository.user'
 #  salut:
 #    class: 'App\Salut'
 #    parameters:

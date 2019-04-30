@@ -54,3 +54,10 @@ services:
             $entityName: 'App\Entity\SymptomPathology'
             $primaryKeyName: 'dummy'
 
+    repository.user:
+        class: 'App\Repository\UserRepository'
+        parameters:
+            $db: '@database'
+            $tableName: 'user'
+            $entityName: 'App\Entity\User'
+            $primaryKeyName: 'id'
