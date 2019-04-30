@@ -68,10 +68,11 @@ abstract class AbstractController
     /**
      * Redirect to a specific url
      *
-     * @param $path
+     * @param string $url
      */
-    protected function redirect($url)
+    protected function redirect(string $url): void
     {
+        header('Status: 301 Moved Permanently', false, 301);
         header("Location: $url");
     }
 }

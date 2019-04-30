@@ -121,7 +121,7 @@ abstract class AbstractRepository
             $query .= ' `' . $key . '` = :' . $key;
 
             // Test if the current type is the last of $types
-            if (end($columns) != $columns[$key]) {
+            if (array_key_last($columns) != $key) {
                 $query .= ' and';
             }
         }
@@ -163,5 +163,39 @@ abstract class AbstractRepository
     protected function getOne(array $objects)
     {
         return !$objects ? null : $objects[0];
+    }
+
+    /**
+     * @param array $params => ['columnName' => 'value']
+     *
+     * @return bool
+     */
+    public function insert(array $params): bool
+    {
+        if (!$params) {
+            return false;
+        }
+
+        $query = 'INSERT INTO ' . $this->tableName . ' (';
+        $values = '';
+
+        foreach ($params as $columnName => $value) {
+            $query .= '`' . $columnName . '`';
+            $values .= ':' . $columnName;
+            // Test if the current item is the last item
+
+            if (array_key_last($params) != $columnName) {
+                $query .= ', ';
+                $values .= ', ';
+            }
+        }
+
+        $query .= ') VALUES (' . $values . ')';
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        // $stmt->errorCode returns '00000' if the request was executed successfully
+        return $stmt->errorCode();
     }
 }
