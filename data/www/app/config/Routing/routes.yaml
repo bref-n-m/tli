@@ -3,13 +3,6 @@ routes:
     path: '/'
     controller: 'App\Controller\DefaultController::index'
 
-  # 404 special route
-  fallbackRoute:
-    path: '/:uri'
-    controller: 'App\Controller\ErrorController::notFound'
-    parameters:
-      uri: '.*'
-
   complex:
     path: '/some/complex/route/:id-:slug'
     controller: 'App\Controller\DefaultController::complex'
@@ -20,3 +13,15 @@ routes:
   register:
     path: '/register'
     controller: 'App\Controller\UserController::register'
+
+  api.searchByKeywords:
+    path: '/api/searchByKeywords'
+    controller: 'App\Controller\PathologyController::searchByKeywords'
+    method: 'POST'
+
+  # 404 special route
+  fallbackRoute:
+    path: '/:uri'
+    controller: 'App\Controller\ErrorController::notFound'
+    parameters:
+      uri: '.*'

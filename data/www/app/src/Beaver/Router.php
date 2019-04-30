@@ -8,6 +8,7 @@ class Router
 {
     const URL_SEPARATOR = '/';
     const PARAMETER_DELIMITER = ':';
+    const METHOD = 'method';
     const FALLBACK_ROUTE = 'fallbackRoute';
 
     /** @var array */
@@ -88,6 +89,11 @@ class Router
      */
     private function match(Request $request, array $route)
     {
+        // check method
+        if (array_key_exists(self::METHOD, $route) && $route[self::METHOD] !== $request->getHttpMethod()) {
+            return false;
+        }
+
         // prepare regex
         $regex = str_replace(
             self::URL_SEPARATOR,
