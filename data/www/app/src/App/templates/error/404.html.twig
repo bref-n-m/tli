@@ -1,2 +1,13 @@
-<p>L'url {{ uri }} n'a pas été trouvée.</p>
-<a href="{{ path('index') }}">Retour à l'accueil</a>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row ">
+        <div class="col-s-3 col-s-push-2">
+            <img src="{{ asset('img/icon-acupuncture.png') }}">
+        </div>
+        <div class="col-s-5 col-s-push-2">
+            <p>L'url {{ uri }} n'a pas été trouvée.</p>
+            <a href="{{ path('index') }}">Retour à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
