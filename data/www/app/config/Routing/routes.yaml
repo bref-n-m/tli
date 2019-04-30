@@ -3,20 +3,22 @@ routes:
     path: '/'
     controller: 'App\Controller\DefaultController::index'
 
+  register:
+    path: '/register'
+    controller: 'App\Controller\UserController::register'
+
+  searchByKeywords:
+    path: '/pathology/searchByKeywords'
+    controller: 'App\Controller\PathologyController::searchByKeywords'
+
+  api.searchByKeywords:
+    path: '/api/searchByKeywords'
+    controller: 'App\Controller\PathologyController::apiSearchByKeywords'
+    method: 'POST'
+
   # 404 special route
   fallbackRoute:
     path: '/:uri'
     controller: 'App\Controller\ErrorController::notFound'
     parameters:
       uri: '.*'
-
-  complex:
-    path: '/some/complex/route/:id-:slug'
-    controller: 'App\Controller\DefaultController::complex'
-    parameters:
-      slug: '[a-zA-Z\-]+'
-      id: '\d+'
-
-  register:
-    path: '/register'
-    controller: 'App\Controller\UserController::register'

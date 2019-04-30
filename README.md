@@ -8,6 +8,7 @@
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
 * [Twig](#twig)
+* [Base de données](#base-de-données)
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
@@ -108,6 +109,7 @@ routes:
   complex:
     path: '/some/complex/route/:id-:slug'
     controller: 'App\Controller\DefaultController::complex'
+    method: 'POST'
     parameters:
       slug: '[a-zA-Z\-]+' # au moins une lettre minuscule ou majuscule ou caractère -
       id: '\d+' # au moins un chiffre
@@ -119,6 +121,7 @@ Chaque route est identifiée par son nom `index` et `complex` dans l'exemple.
 |:---:| ----------- |
 | `path` | Donne l'`uri` de la route |
 | `controller` | Une route correspond à une méthode d'un controller. Ainsi, la valeur `App\Controller\DefaultController::index`, précise que la méthode `index` de la classe `App\Controller\DefaultController`, sera utilisé pour la route en question. |
+| `method` | La clé method, permet de préciser la méthode d'une route (`GET`, `POST`, ...) |
 | `parameters` | Une route peut prendre des paramètres, chaque paramètre est une expression régulière. Le site [regex 101](https://regex101.com/) permet de tester facilement vos expressions régulires.<br>Dans la clé `path`, les paramètres seront préfixés par `:`, exemple pour les paramètres `id` et `slug`: `path: '/some/complex/route/:id-:slug'`<br>Ces paramètres seront ensuite envoyés en paramètres à la méthode du controller, voir [récupération des paramètres](#récupération-des-paramètres) |
 
 ### Route de fallback (404)
@@ -204,6 +207,7 @@ class DefaultController extends AbstractController
 Les paramètres sont récupérés par une action en paramètres, ex: `public function complex(string $slug, int $id)`.
 
 ## Twig
+
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
 
 Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisées:
@@ -227,4 +231,14 @@ Exemple d'utilisation de ces méthodes:
 </html>
 ```
 
+Twig est installé en version 2.8.1.
+
 [Doc de twig](https://twig.symfony.com/doc/2.x/)
+
+## Base de données
+
+![DB](doc/img/db.png)
+
+Schéma de la base de données initiale.
+
+[Script de la base de données initiale](http://github.com/bref-n-m/tli/blob/develop/doc/script/db.sql)

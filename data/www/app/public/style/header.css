@@ -31,6 +31,8 @@ a{
 .container{
     margin: 30px 20px;
     overflow: auto;
+
+    z-index: 100;
 }
 
 .site-content{
@@ -48,12 +50,20 @@ a{
     color: var(--header-second-color);
 
     background-color: var(--header-bg-color);
+
+    z-index: 1000;
 }
 
 .header_logo{
     font-weight: bold;
     padding: 0 25px;
     float: left;
+}
+
+.header_logo img.brand_icon {
+    height: 34px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 /* MENU */
