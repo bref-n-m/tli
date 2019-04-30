@@ -8,6 +8,7 @@
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
 * [Twig](#twig)
+* [Base de données](#base-de-données)
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
@@ -204,6 +205,7 @@ class DefaultController extends AbstractController
 Les paramètres sont récupérés par une action en paramètres, ex: `public function complex(string $slug, int $id)`.
 
 ## Twig
+
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
 
 Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisées:
@@ -227,4 +229,14 @@ Exemple d'utilisation de ces méthodes:
 </html>
 ```
 
+Twig est installé en version 2.8.1.
+
 [Doc de twig](https://twig.symfony.com/doc/2.x/)
+
+## Base de données
+
+![DB](doc/img/db.png)
+
+Schéma de la base de données initiale.
+
+[Script de la base de données initiale](http://github.com/bref-n-m/tli/blob/develop/doc/script/db.sql)
