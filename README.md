@@ -8,6 +8,10 @@
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
 * [Twig](#twig)
+* [CSS](#CSS)
+    * [Header](#Header)
+    * [Grid](#Grid)
+    * [Miscellaneous](#Miscellaneous)
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
@@ -228,3 +232,82 @@ Exemple d'utilisation de ces méthodes:
 ```
 
 [Doc de twig](https://twig.symfony.com/doc/2.x/)
+
+## CSS
+
+Les fichiers de style se trouvent dans ‘App/Public/Style‘.
+* Le fichier ‘header' correspond à l'en-tête / Nav bar
+* Le fichier ‘grid' correspond au principe de grille
+* Le fichier ‘miscellaneous' correspond au reste du style
+
+### Header
+La nav bar est faite de façon a être responsive.
+En effet, toutes les pages sont accessibles quand l'écrane est en grand, autrement il y a un menu sur la gauche qui se glisse pour selectionner la page.
+
+Pour se faire, nous avons implémenté le CSS et un peu de javascript (Jquery)
+
+### Grid
+Nous utilisons un standard de largeur de 12 colonnes. Cette grille aide à l'organisation de la page et de la rendre esthétique.
+``` twig
+<div class="row">
+    <div class="col-s-6 col-m-3">
+        ...
+    </div>
+    <div class="col-s-3 col-m-1">
+        ...
+    </div>
+    <div class="col-s-3 col-m-1">
+        ...
+    </div>
+</div>
+
+```
+
+Différentes tailles :
+* S -> Small Screen
+* M -> Medium Screen
+* L -> Large Screen
+
+La plus petite taille est maitre.
+
+Il est aussi possible de pousser, de rendre visible ou non et de centrer les div
+
+```CSS
+.col-s-push-0,.col-s-push-1,
+.col-s-center,
+.col-s-hidden,
+.col-s-show
+
+```
+
+ 
+### Miscellaneous
+
+Utilisation de bloc, avec ou sans footer possible
+
+``` twig
+<div class="card">
+    <div class="card-header">
+        Card Title
+    </div>
+    <div class="card-body">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
+        ex ea commodo consequat.
+    </div>
+    <div class="card-footer">
+        Card Footer
+    </div>
+</div>
+
+```
+
+Utilisation de bouton, en variant son importance :
+``` twig
+    <button class="button warning">Warning</button>
+    <button class="button danger">Danger</button>
+    <button class="button light">Light</button>
+    <button class="button success">Success</button>
+    <button class="button info">Info</button>
+    <button class="button secondary">Secondary</button>
+
+```
