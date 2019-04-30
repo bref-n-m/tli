@@ -7,7 +7,12 @@ use PDO;
 
 class PathologyRepository extends AbstractRepository
 {
-    public function findByKeyWords(array $keywords)
+    /**
+     * @param array $keywords
+     *
+     * @return array
+     */
+    public function findByKeyWords(array $keywords): array
     {
         // complex code to manage list with pdo, purposely not factorised
         $inKeywords = [];
