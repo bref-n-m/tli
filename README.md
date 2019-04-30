@@ -3,6 +3,7 @@
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
+  * [Route de fallback (404)](#Route-de-fallback-(404))
   * [Service de routing](#service-de-routing)
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
@@ -119,6 +120,22 @@ Chaque route est identifiée par son nom `index` et `complex` dans l'exemple.
 | `path` | Donne l'`uri` de la route |
 | `controller` | Une route correspond à une méthode d'un controller. Ainsi, la valeur `App\Controller\DefaultController::index`, précise que la méthode `index` de la classe `App\Controller\DefaultController`, sera utilisé pour la route en question. |
 | `parameters` | Une route peut prendre des paramètres, chaque paramètre est une expression régulière. Le site [regex 101](https://regex101.com/) permet de tester facilement vos expressions régulires.<br>Dans la clé `path`, les paramètres seront préfixés par `:`, exemple pour les paramètres `id` et `slug`: `path: '/some/complex/route/:id-:slug'`<br>Ces paramètres seront ensuite envoyés en paramètres à la méthode du controller, voir [récupération des paramètres](#récupération-des-paramètres) |
+
+### Route de fallback (404)
+
+Pour gérer les pages non trouvées, il est necessaire de créer une route `fallbackRoute`, cette route doit matcher toutes les urls (voir l'exemple suivant).
+
+````yaml
+# /data/www/app/config/Routing/routes.yaml
+
+routes:
+    # 404 special route
+    fallbackRoute:
+    path: '/:uri'
+    controller: 'App\Controller\ErrorController::notFound'
+    parameters:
+      uri: '.*'
+````
 
 ### Service de routing
 

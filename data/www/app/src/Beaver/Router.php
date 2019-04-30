@@ -8,15 +8,25 @@ class Router
 {
     const URL_SEPARATOR = '/';
     const PARAMETER_DELIMITER = ':';
+    const FALLBACK_ROUTE = 'fallbackRoute';
 
     /** @var array */
     private $routes;
 
     /**
+     * If key fallbackRoute exists, it must be at the last element of $routes
+     *
      * @param array $routes
      */
     public function setRoutes(array $routes): void
     {
+        // weird code, but if the key self::FALLBACK_ROUTE exists in $routes, put it at the end of the array
+        if (array_key_exists(self::FALLBACK_ROUTE, $routes['routes'])) {
+            $fallbackRoute = $routes['routes'][self::FALLBACK_ROUTE];
+            unset($routes['routes'][self::FALLBACK_ROUTE]);
+            $routes['routes'][self::FALLBACK_ROUTE] = $fallbackRoute;
+        }
+
         $this->routes = $routes;
     }
 
