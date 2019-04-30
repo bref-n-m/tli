@@ -1,0 +1,23 @@
+<html>
+    <body>
+    {{ apiSearchUri }}
+
+    <div class="pathologies"></div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>
+    $.post({
+        url: '{{ apiSearchUri }}',
+        data: {
+            'keywords': JSON.stringify(['anxiété', 'folie', 'froid']),
+        },
+        success: function (data) {
+            data.pathologies.forEach(function (pathology) {
+                let pathologyTemplate = `<a href="${pathology.idS}">${pathology.desc}</a><br>`;
+                $('.pathologies').append(pathologyTemplate);
+            });
+        },
+    });
+    </script>
+    </body>
+</html>

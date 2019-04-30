@@ -14,9 +14,13 @@ routes:
     path: '/register'
     controller: 'App\Controller\UserController::register'
 
+  searchByKeywords:
+    path: '/pathology/searchByKeywords'
+    controller: 'App\Controller\PathologyController::searchByKeywords'
+
   api.searchByKeywords:
     path: '/api/searchByKeywords'
-    controller: 'App\Controller\PathologyController::searchByKeywords'
+    controller: 'App\Controller\PathologyController::apiSearchByKeywords'
     method: 'POST'
 
   # 404 special route

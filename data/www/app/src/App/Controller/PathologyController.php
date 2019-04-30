@@ -2,13 +2,33 @@
 
 namespace App\Controller;
 
+use App\Repository\PathologyRepository;
 use Beaver\Controller\AbstractController;
 use Beaver\Response\JsonResponse;
+use Beaver\Router;
 
 class PathologyController extends AbstractController
 {
     public function searchByKeywords()
     {
-        return new JsonResponse([]);
+        /** @var Router $router */
+        $router = $this->get('router');
+
+        return $this->render('pathology/search.html.twig', [
+            'apiSearchUri' => $router->generatePath('api.searchByKeywords')
+        ]);
+    }
+
+    public function apiSearchByKeywords()
+    {
+        /** @var PathologyRepository $pathologyRepository */
+        $pathologyRepository = $this->get('repository.pathology');
+
+        $keywords = $this->request->getPostValue('keywords');
+        $keywords = $keywords ? json_decode($keywords) : [];
+
+        return new JsonResponse([
+            'pathologies' => $pathologyRepository->findByKeyWords($keywords)
+        ]);
     }
 }
