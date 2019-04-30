@@ -7,7 +7,7 @@ use Twig\Loader\FilesystemLoader;
 
 class TwigLoader
 {
-    const PUBLIC_DIRECTORY = 'public'.DIRECTORY_SEPARATOR;
+    const PUBLIC_DIRECTORY = DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR;
 
     /** @var Environment */
     private $twig;
