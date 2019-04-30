@@ -71,7 +71,7 @@ a{
 }
 
 /* Responsive */
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 860px) {
     .site-container{
         overflow: hidden;
         height: 100%;
