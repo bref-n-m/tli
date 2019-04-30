@@ -20,10 +20,13 @@ class PathologyRepository extends AbstractRepository
         $in = rtrim($in, ',');
 
         $stmt = $this->db->prepare("
-            SELECT s.*
+            SELECT DISTINCT s.desc as symptDesc, p.type as pathoType, p.desc as pathoDesc, m.nom as merNom, m.yin as yin
             FROM keywords k
             JOIN keySympt ks ON k.idK = ks.idK
             JOIN symptome s ON s.idS = ks.idS
+            JOIN symptPatho sp ON s.idS = sp.idS
+            JOIN patho p ON sp.idP = p.idP
+            JOIN meridien m ON m.code = p.mer
             WHERE k.name IN ($in);
         ");
 

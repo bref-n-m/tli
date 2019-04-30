@@ -67,6 +67,10 @@ table.table td, table.table th {
     padding: 8px 15px;
 }
 
+table.table td.center {
+    text-align: center;
+}
+
 /* Titres */
 
 /* Blocs */

@@ -1,23 +1,89 @@
-<html>
-    <body>
-    {{ apiSearchUri }}
+{% extends 'base.html.twig' %}
 
-    <div class="pathologies"></div>
+{% block body %}
+    <div class="row ">
+        <div class="col-s-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Recherche de pathologies par mot-clef</h1>
+                </div>
+                <div class="card-body">
+                    <div class="search">
+                        <form class="form" id="search" action="#">
+                            <input type="text" id="keywords" placeholder="Mots clés séparés par des espaces" autocomplete="off">
+                            <button class="button success">Recherche</button>
+                        </form>
+                    </div>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+                    <table class="table table-stripped pathologies collapse">
+                        <tr>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Méridien</th>
+                            <th>Symptôme</th>
+                            <th>Yin Yang</th>
+                            <th>Lien</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
     <script>
-    $.post({
-        url: '{{ apiSearchUri }}',
-        data: {
-            'keywords': JSON.stringify(['anxiété', 'folie', 'froid']),
-        },
-        success: function (data) {
-            data.pathologies.forEach(function (pathology) {
-                let pathologyTemplate = `<a href="${pathology.idS}">${pathology.desc}</a><br>`;
-                $('.pathologies').append(pathologyTemplate);
+        $(document).ready(function () {
+            let keywords = location.hash;
+            keywords = keywords.slice(1, keywords.length);
+            keywords = unescape(keywords)
+
+            consumeAPI(keywords.split(' '));
+            $('#keywords').val(keywords);
+        });
+
+        $('#search').submit(function (e) {
+            e.preventDefault();
+
+            let keywords = $('#keywords').val();
+            consumeAPI(keywords.split(' '));
+
+            let hash = escape(keywords);
+            location.hash = `#${hash}`;
+        });
+
+        function consumeAPI(keywords) {
+            $.post({
+                url: '{{ apiSearchUri }}',
+                data: {
+                    'keywords': JSON.stringify(keywords),
+                },
+                success: function (data) {
+                    $('.pathologies tr:nth-child(1)')
+                        .nextAll().remove();
+
+                    if (0 !== data.pathologies.length) {
+                        $('.pathologies').removeClass('collapse');
+                    }
+                    else {
+                        $('.pathologies').addClass('collapse');
+                    }
+
+                    data.pathologies.forEach(function (pathology) {
+                        let pathologyTemplate = `<tr>
+                            <td>${pathology.pathoDesc}</td>
+                            <td>${pathology.pathoType}</td>
+                            <td>${pathology.merNom}</td>
+                            <td>${pathology.symptDesc}</td>
+                            <td>${1 == pathology.yin ? 'Yin' : 'Yang'}</td>
+                            <td class="center"><a href="" class="button info">Consulter</a></td>
+                        </tr>`;
+                        $('.pathologies').append(pathologyTemplate);
+                    });
+                },
             });
-        },
-    });
+        }
     </script>
-    </body>
-</html>
+{% endblock %}
