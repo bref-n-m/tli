@@ -3,15 +3,16 @@
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
-  * [Route de fallback (404)](#Route-de-fallback-(404))
+  * [Route de fallback (404)](#route-de-fallback-404)
   * [Service de routing](#service-de-routing)
 * [Controllers](#controllers)
   * [Récupération des paramètres](#récupération-des-paramètres)
 * [Twig](#twig)
-* [CSS](#CSS)
-    * [Header](#Header)
-    * [Grid](#Grid)
-    * [Miscellaneous](#Miscellaneous)
+* [CSS](#css)
+  * [Header](#header)
+  * [Grid](#grid)
+  * [Miscellaneous](#miscellaneous)
+* [Base de données](#base-de-données)
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
@@ -112,6 +113,7 @@ routes:
   complex:
     path: '/some/complex/route/:id-:slug'
     controller: 'App\Controller\DefaultController::complex'
+    method: 'POST'
     parameters:
       slug: '[a-zA-Z\-]+' # au moins une lettre minuscule ou majuscule ou caractère -
       id: '\d+' # au moins un chiffre
@@ -123,6 +125,7 @@ Chaque route est identifiée par son nom `index` et `complex` dans l'exemple.
 |:---:| ----------- |
 | `path` | Donne l'`uri` de la route |
 | `controller` | Une route correspond à une méthode d'un controller. Ainsi, la valeur `App\Controller\DefaultController::index`, précise que la méthode `index` de la classe `App\Controller\DefaultController`, sera utilisé pour la route en question. |
+| `method` | La clé method, permet de préciser la méthode d'une route (`GET`, `POST`, ...) |
 | `parameters` | Une route peut prendre des paramètres, chaque paramètre est une expression régulière. Le site [regex 101](https://regex101.com/) permet de tester facilement vos expressions régulires.<br>Dans la clé `path`, les paramètres seront préfixés par `:`, exemple pour les paramètres `id` et `slug`: `path: '/some/complex/route/:id-:slug'`<br>Ces paramètres seront ensuite envoyés en paramètres à la méthode du controller, voir [récupération des paramètres](#récupération-des-paramètres) |
 
 ### Route de fallback (404)
@@ -208,6 +211,7 @@ class DefaultController extends AbstractController
 Les paramètres sont récupérés par une action en paramètres, ex: `public function complex(string $slug, int $id)`.
 
 ## Twig
+
 Tous les fichiers twig se trouvent dans le répertoire `/data/www/app/src/App/templates/`
 
 Les fonctions suivantes, ont étés recrées pour notre architecture, et doivent être utilisées:
@@ -230,6 +234,8 @@ Exemple d'utilisation de ces méthodes:
 </body>
 </html>
 ```
+
+Twig est installé en version 2.8.1.
 
 [Doc de twig](https://twig.symfony.com/doc/2.x/)
 
@@ -260,7 +266,6 @@ Nous utilisons un standard de largeur de 12 colonnes. Cette grille aide à l'org
         ...
     </div>
 </div>
-
 ```
 
 Différentes tailles :
@@ -277,9 +282,7 @@ Il est aussi possible de pousser, de rendre visible ou non et de centrer les div
 .col-s-center,
 .col-s-hidden,
 .col-s-show
-
 ```
-
  
 ### Miscellaneous
 
@@ -298,7 +301,6 @@ Utilisation de bloc, avec ou sans footer possible
         Card Footer
     </div>
 </div>
-
 ```
 
 Utilisation de bouton, en variant son importance :
@@ -309,5 +311,12 @@ Utilisation de bouton, en variant son importance :
     <button class="button success">Success</button>
     <button class="button info">Info</button>
     <button class="button secondary">Secondary</button>
-
 ```
+
+## Base de données
+
+![DB](doc/img/db.png)
+
+Schéma de la base de données initiale.
+
+[Script de la base de données initiale](http://github.com/bref-n-m/tli/blob/develop/doc/script/db.sql)
