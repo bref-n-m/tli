@@ -15,6 +15,10 @@ routes:
     path: '/user/edit'
     controller: 'App\Controller\UserController::edit'
 
+  user.edit.password:
+    path: '/user/edit/password'
+    controller: 'App\Controller\UserController::editPassword'
+
   user.delete:
     path: '/user/delete'
     controller: 'App\Controller\UserController::delete'
