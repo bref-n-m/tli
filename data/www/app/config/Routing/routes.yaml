@@ -11,6 +11,10 @@ routes:
     path: '/user/edit'
     controller: 'App\Controller\UserController::edit'
 
+  user.delete:
+    path: '/user/delete'
+    controller: 'App\Controller\UserController::delete'
+
   searchByKeywords:
     path: '/pathology/searchByKeywords'
     controller: 'App\Controller\PathologyController::searchByKeywords'

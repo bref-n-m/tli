@@ -231,4 +231,33 @@ abstract class AbstractRepository
         // $stmt->errorCode returns '00000' if the request was executed successfully
         return $stmt->errorCode();
     }
+
+    /**
+     * @param array $whereParams
+     *
+     * @return bool
+     */
+    public function delete(array $whereParams): bool
+    {
+        if (!$whereParams) {
+            return false;
+        }
+
+        $query = 'DELETE FROM `' . $this->tableName . '` WHERE ';
+
+        foreach ($whereParams as $columnName => $value) {
+            $query .= '`' . $columnName . '` = :' . $columnName;
+
+            // Test if the current type is the last of $types
+            if (array_key_last($whereParams) != $columnName) {
+                $query .= ' and';
+            }
+        }
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($whereParams);
+
+        // $stmt->errorCode returns '00000' if the request was executed successfully
+        return $stmt->errorCode();
+    }
 }

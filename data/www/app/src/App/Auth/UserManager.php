@@ -47,6 +47,23 @@ class UserManager
     /**
      * @param array $userParams
      *
+     * @return bool
+     *
+     * @throws \ReflectionException
+     */
+    public function delete(array $userParams): bool
+    {
+        // Test if the user exists
+        if (!$this->userRepository->getByRows($userParams)) {
+            return false;
+        }
+
+        return $this->userRepository->delete($userParams);
+    }
+
+    /**
+     * @param array $userParams
+     *
      * @return array
      */
     private function formatData(array $userParams): ?array
