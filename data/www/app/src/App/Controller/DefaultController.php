@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Auth\Hasher;
 use Beaver\Controller\AbstractController;
 
 class DefaultController extends AbstractController

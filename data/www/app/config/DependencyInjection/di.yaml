@@ -3,6 +3,10 @@ services:
     class: 'App\Auth\UserManager'
     parameters:
       $userRepository: '@repository.user'
+
+  hasher:
+    class: 'App\Auth\Hasher'
+
 #  salut:
 #    class: 'App\Salut'
 #    parameters:
