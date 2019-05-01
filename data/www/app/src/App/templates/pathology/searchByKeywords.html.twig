@@ -26,7 +26,6 @@
                             <th class="col-s-hidden">Méridien</th>
                             <th class="col-s-hidden">Symptôme</th>
                             <th class="col-s-hidden">Yin Yang</th>
-                            <th>Lien</th>
                         </tr>
                     </table>
                 </div>
@@ -82,7 +81,6 @@
                             <td class="col-s-hidden">${pathology.merNom}</td>
                             <td class="col-s-hidden">${pathology.symptDesc}</td>
                             <td class="col-s-hidden">${1 == pathology.yin ? 'Yin' : 'Yang'}</td>
-                            <td class="center"><a href="" class="button info">Consulter</a></td>
                         </tr>`;
                         $('.pathologies').append(pathologyTemplate);
                     });
