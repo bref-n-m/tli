@@ -67,10 +67,6 @@ a{
 }
 
 /* MENU */
-.menu{
-    float: left;
-}
-
 .menu a {
     padding: 0 10px;
 }
@@ -78,6 +74,11 @@ a{
 .menu a:hover {
     color: var(--header-bg-color);
     filter: brightness(50%);
+}
+
+.menu .right {
+    float: right;
+    padding: 0 25px;
 }
 
 /* Responsive */
@@ -125,8 +126,6 @@ a{
         top: 16px;
         left: 15px;
         box-shadow: 0 10px 0 1px var(--header-second-color), 0 16px 0 1px var(--header-second-color), 0 22px 0 1px var(--header-second-color);
-
-
     }
 
     .menu{
@@ -151,6 +150,10 @@ a{
         line-height: 40px;
 
         border-bottom: 1px solid var(--header-bg-color);
+    }
+    .menu .right {
+        float: none;
+        padding: 0;
     }
 
     .with-sidebar .site-pusher{
