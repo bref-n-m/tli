@@ -82,6 +82,9 @@ class Kernel
             $orderedParameters[] = $route->getParameters()[$parameter->getName()];
         }
 
+        // add special service to the container
+        $this->container->addSpecialService('request', $request);
+
         return $reflector->getMethod($action)->invokeArgs(
             $controllerInstance,
             $orderedParameters

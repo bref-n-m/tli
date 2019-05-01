@@ -25,6 +25,23 @@ class Container
     }
 
     /**
+     * Add a special service to the instance list
+     *
+     * @param string $serviceName
+     * @param $service
+     *
+     * @throws \Exception
+     */
+    public function addSpecialService(string $serviceName, $service)
+    {
+        if (array_key_exists($serviceName, $this->instances)) {
+            throw new \Exception("A service is already registered for key: $serviceName");
+        }
+
+        $this->instances[$serviceName] = $service;
+    }
+
+    /**
      * Resolve a given service
      *
      * @param string $serviceName
