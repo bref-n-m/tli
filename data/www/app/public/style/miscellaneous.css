@@ -8,6 +8,20 @@
     --button-white-color: #FFF;
 }
 
+/* Titres */
+
+.h1{
+    padding: .375rem .75rem;
+}
+
+.h2{
+    padding: .375rem .75rem;
+}
+
+.h3{
+    padding: .1rem .25rem;
+}
+
 /* Bouton */
 .button {
     margin: .375rem .75rem;
@@ -15,6 +29,7 @@
     font-size: 1rem;
     line-height: 1.5;
 
+    overflow: visible;
     min-width: 6rem;
 }
 .button.success {
@@ -122,4 +137,9 @@ form.form input {
 
 form.form button {
     margin: .375rem 0;
+}
+form.form ul{
+
+    max-height: 100px;
+    overflow-y: scroll;
 }

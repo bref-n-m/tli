@@ -30,3 +30,34 @@ routes:
     controller: 'App\Controller\ErrorController::notFound'
     parameters:
       uri: '.*'
+
+  complex:
+    path: '/some/complex/route/:id-:slug'
+    controller: 'App\Controller\DefaultController::complex'
+    parameters:
+      slug: '[a-zA-Z\-]+'
+      id: '\d+'
+
+  register:
+    path: '/register'
+    controller: 'App\Controller\UserController::register'
+
+  information:
+    path: '/information'
+    controller: 'App\Controller\DefaultController::information'
+
+  symptomes:
+    path: '/symptomes'
+    controller: 'App\Controller\DefaultController::symptomes'
+
+  pathologie:
+    path: '/pathologie'
+    controller: 'App\Controller\DefaultController::pathologie'
+
+  recherche:
+    path: '/recherche'
+    controller: 'App\Controller\DefaultController::recherche'
+
+  connection:
+    path: '/connection'
+    controller: 'App\Controller\DefaultController::connection'
