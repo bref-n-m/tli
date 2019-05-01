@@ -4,6 +4,7 @@
   * [Récupérer les sources](#récupérer-les-sources)
   * [Lancer la stack docker](#lancer-la-stack-docker)
   * [Déscription des services](#déscription-des-services)
+* [Générer la documentation PHP](#générer-la-documentation-php)
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
@@ -59,6 +60,9 @@ Ce service écoute sur le port 3306 de votre machine.
 #### myadmin
 Comme dit précédemment ce service est uniquement basé sur l'image *phpmyadmin/phpmyadmin*, nous n'avons pas créé de *Dockerfile* spécifique pour celui-ci.  
 Ce service écoute sur le port 8080 de votre machine.
+
+## Générer la documentation PHP
+Pour générer la documentation PHP avec [phpDocumentor](https://www.phpdoc.org/), il suffit de lancer la commande `make phpDocumentor`. La documentation se trouvera alors dans le dossier `doc/phpDocumentor/`. Le dossier `Twig/` est exclus de la documentation.
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
