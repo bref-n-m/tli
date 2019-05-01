@@ -3,8 +3,8 @@ routes:
     path: '/'
     controller: 'App\Controller\DefaultController::index'
 
-  register:
-    path: '/register'
+  user.register:
+    path: '/user/register'
     controller: 'App\Controller\UserController::register'
 
   searchByKeywords:

@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 
 class UserManager
 {
+
+    /** @var UserRepository */
     private $userRepository;
 
     /** @var Hasher */
@@ -17,10 +19,28 @@ class UserManager
         $this->hasher = $hasher;
     }
 
+    /**
+     * @param array $userParams
+     *
+     * @return bool
+     */
     public function register(array $userParams): bool
     {
+        $userParams = $this->formatData($userParams);
+
+        return !$userParams ? false : $this->userRepository->insert($userParams);
+    }
+
+    /**
+     * @param array $userParams
+     *
+     * @return array
+     */
+    private function formatData(array $userParams): ?array
+    {
+        // Test if the passwords are identical
         if (!($userParams['password'] === $userParams['password_confirm'])) {
-            return false;
+            return null;
         }
 
         // Remove the confirmed password from the user params
