@@ -1,3 +1,5 @@
 services:
   'user.register.form':
       class: 'App\Form\UserRegisterForm'
+  'user.edit.form':
+      class: 'App\Form\UserEditForm'

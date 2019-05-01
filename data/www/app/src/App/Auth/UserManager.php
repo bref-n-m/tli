@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 
 class UserManager
 {
+    const UNIQUE_KEY = 'email';
 
     /** @var UserRepository */
     private $userRepository;
@@ -29,6 +30,18 @@ class UserManager
         $userParams = $this->formatData($userParams);
 
         return !$userParams ? false : $this->userRepository->insert($userParams);
+    }
+
+    /**
+     * @param array $userParams
+     *
+     * @return bool
+     */
+    public function update(array $userParams): bool
+    {
+        $userParams = $this->formatData($userParams);
+
+        return !$userParams ? false : $this->userRepository->update($userParams, self::UNIQUE_KEY);
     }
 
     /**

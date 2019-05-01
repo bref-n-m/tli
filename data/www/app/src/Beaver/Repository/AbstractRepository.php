@@ -198,4 +198,37 @@ abstract class AbstractRepository
         // $stmt->errorCode returns '00000' if the request was executed successfully
         return $stmt->errorCode();
     }
+
+    /**
+     * @param array $params
+     *
+     * @param string $whereKey Must to be in $params
+     *
+     * @return bool
+     */
+    public function update(array $params, string $whereKey): bool
+    {
+        if (!$params) {
+            return false;
+        }
+
+        $query = 'UPDATE ' . $this->tableName . '` SET ';
+
+        foreach ($params as $columnName => $value) {
+            $query .= '`' . $columnName . '` = :' . $columnName;
+
+            // Test if the current item is the last item
+            if (array_key_last($params) != $columnName) {
+                $query .= ', ';
+            }
+        }
+
+        $query .= ' WHERE `' . $whereKey . '` = :' . $whereKey;
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        // $stmt->errorCode returns '00000' if the request was executed successfully
+        return $stmt->errorCode();
+    }
 }

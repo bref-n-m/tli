@@ -7,6 +7,10 @@ routes:
     path: '/user/register'
     controller: 'App\Controller\UserController::register'
 
+  user.edit:
+    path: '/user/edit'
+    controller: 'App\Controller\UserController::edit'
+
   searchByKeywords:
     path: '/pathology/searchByKeywords'
     controller: 'App\Controller\PathologyController::searchByKeywords'
