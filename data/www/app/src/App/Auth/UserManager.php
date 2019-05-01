@@ -29,7 +29,13 @@ class UserManager
     {
         $userParams = $this->formatData($userParams);
 
-        return !$userParams ? false : $this->userRepository->insert($userParams);
+        if (!$userParams) {
+            return false;
+        }
+
+        $user = $this->userRepository->getUserByEmail($userParams['email']);
+
+        return $user ? false : $this->userRepository->insert($userParams);
     }
 
     /**
