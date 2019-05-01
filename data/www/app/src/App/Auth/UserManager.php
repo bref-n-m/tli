@@ -8,9 +8,13 @@ class UserManager
 {
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    /** @var Hasher */
+    private $hasher;
+
+    public function __construct(UserRepository $userRepository, Hasher $hasher)
     {
         $this->userRepository = $userRepository;
+        $this->hasher = $hasher;
     }
 
     public function register(array $userParams): bool
@@ -22,6 +26,8 @@ class UserManager
         // Remove the confirmed password from the user params
         unset($userParams['password_confirm']);
 
-        return $this->userRepository->insert($userParams);
+        $userParams['password'] = $this->hasher->hash($userParams['password']);
+
+        return $userParams;
     }
 }
