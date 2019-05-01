@@ -7,20 +7,12 @@ use App\Repository\PathologyRepository;
 use Beaver\Controller\AbstractController;
 use Beaver\Response\JsonResponse;
 use Beaver\Response\Response;
-use Beaver\Router;
 
 class PathologyController extends AbstractController
 {
     public function index()
     {
         return $this->render('pathology/index.html.twig', [
-            'name' => 'Beaver',
-        ]);
-    }
-
-    public function search()
-    {
-        return $this->render('pathology/search.html.twig', [
             'name' => 'Beaver',
         ]);
     }
@@ -33,9 +25,6 @@ class PathologyController extends AbstractController
             $this->addNotification('Vous n\'etes pas connecté, la page est inaccessible.', 'danger');
             return $this->redirect($this->get('router')->generatePath('index'));
         }
-
-        /** @var Router $router */
-        $router = $this->get('router');
 
         return $this->render('pathology/searchByKeywords.html.twig');
     }

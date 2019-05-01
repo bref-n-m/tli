@@ -31,10 +31,6 @@ routes:
     path: '/pathology'
     controller: 'App\Controller\PathologyController::index'
 
-  pathology.search:
-    path: '/pathology/search'
-    controller: 'App\Controller\PathologyController::search'
-
   pathology.searchByKeywords:
     path: '/pathology/searchByKeywords'
     controller: 'App\Controller\PathologyController::searchByKeywords'
