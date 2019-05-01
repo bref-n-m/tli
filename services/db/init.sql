@@ -2481,3 +2481,6 @@ CREATE TABLE `user` (
     PRIMARY KEY (`id`),
     UNIQUE `USER_EMAIL_INDEX` (`email`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `user` (`email`, `first_name`, `last_name`, `password`)
+VALUES ('user@gmail.com', 'user', 'user', '$2y$12$DJvjpilZnY1PY3vnUVf/OuTQvlI1lddQeCdqfaoUPMQ4Bd.dJ/bbO');
