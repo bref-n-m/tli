@@ -22,9 +22,7 @@ class AuthenticatorController extends AbstractController
         $authenticator = $this->get('authenticator');
         $authenticator->disconnect();
 
-        /** @var Notificator $notificator */
-        $notificator = $this->get('notificator');
-        $notificator->addNotification('Vous avez bien été déconnecté!', 'success');
+        $this->addNotification('Vous avez bien été déconnecté!', 'success');
 
         $this->redirect($this->get('router')->generatePath('index'));
     }

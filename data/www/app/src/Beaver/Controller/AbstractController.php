@@ -93,4 +93,17 @@ abstract class AbstractController
         header('Status: 301 Moved Permanently', false, 301);
         header("Location: $url");
     }
+
+    /**
+     * @param string $message
+     * @param string $type
+     *
+     * @throws \ReflectionException
+     */
+    protected function addNotification(string $message, string $type)
+    {
+        /** @var Notificator $notificator */
+        $notificator = $this->get('notificator');
+        $notificator->addNotification($message, $type);
+    }
 }
