@@ -45,8 +45,6 @@ class UserManager
      */
     public function update(array $userParams): bool
     {
-        $userParams = $this->formatData($userParams);
-
         return !$userParams ? false : $this->userRepository->update($userParams, self::UNIQUE_KEY);
     }
 
