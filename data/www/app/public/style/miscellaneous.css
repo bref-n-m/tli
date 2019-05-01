@@ -31,6 +31,14 @@ a {
     cursor: pointer;
 }
 
+/* Abréviations */
+
+abbr{
+    border-bottom: none;
+    text-decoration: none;
+    font-style: italic;
+}
+
 /* Bouton and alerts */
 .button, .alert {
     margin: .375rem .75rem;
