@@ -7,19 +7,10 @@ services:
 
   hasher:
     class: 'App\Auth\Hasher'
-#  salut:
-#    class: 'App\Salut'
-#    parameters:
-#      $d: '@bonjour'
-#      $b: 'b'
-#      $a: '@truc'
-#      $c: 'c'
-#
-#  truc:
-#    class: 'App\Truc'
-#    parameters:
-#      $a: 'a'
-#      $b: '@bonjour'
-#
-#  bonjour:
-#    class: 'App\Bonjour'
+
+  authenticator:
+    class: 'App\Auth\Authenticator'
+    parameters:
+      $userRepository: '@repository.user'
+      $hasher: '@hasher'
+      $request: '@request'

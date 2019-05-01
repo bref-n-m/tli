@@ -7,10 +7,10 @@ use Beaver\Repository\AbstractRepository;
 
 class UserRepository extends AbstractRepository
 {
-    public function getUserByEmailAndPassword(string $email, string $password): ?User
+    public function getUserByEmail(string $email): ?User
     {
         return $this->getOne(
-            $this->getByRows(['email' => $email, 'password' => $password])
+            $this->getByRow('email', $email)
         );
     }
 }

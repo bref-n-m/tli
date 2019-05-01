@@ -35,7 +35,7 @@ class Request
     /**
      * @param string $key
      *
-     * @return array
+     * @return string
      */
     public function getSessionValue(string $key)
     {
@@ -48,8 +48,18 @@ class Request
      *
      * @return string
      */
-    public function setSessionValue(string $key, string $value): string
+    public function setSessionValue(string $key, string $value)
     {
         $_SESSION[$key] = $value;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function unsetSessionValue(string $key)
+    {
+        if (array_key_exists($key, $_SESSION)) {
+            unset($_SESSION[$key]);
+        }
     }
 }

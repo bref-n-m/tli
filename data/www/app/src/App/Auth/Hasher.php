@@ -16,4 +16,15 @@ class Hasher
     {
         return password_hash($password, self::HASH_ALGORITHM, self::OPTIONS);
     }
+
+    /**
+     * @param string $hashedPassword
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function verrify(string $hashedPassword, string $password): bool
+    {
+        return password_verify($password, $hashedPassword);
+    }
 }
