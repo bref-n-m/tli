@@ -26,5 +26,8 @@
         <input tabindex="4" type="submit" name="valider" value="Valider" />
     </form>
 
-    <a href="{{ path('user.edit.password') }}" class="button info">Modifier le mot de passe</a>
+    <a tabindex="5" href="{{ path('user.edit.password') }}" class="button info">Modifier le mot de passe</a>
+    <form method="post" action="{{ path('user.delete') }}" onsubmit="return confirm('Voulez-vous vraiment suppimer le compte ?')">
+        <button tabindex="6" type="submit" class="button info">Supprimer le compte</button>
+    </form>
 {% endblock %}

@@ -125,26 +125,32 @@ class UserController extends AbstractController
 
     public function delete()
     {
+        /** @var Authenticator $authenticator */
+        $authenticator = $this->get('authenticator');
+        /** @var User $user */
+        $user = $authenticator->getUser();
+
+        if (!$user) {
+            $this->addNotification('Vous n\'etes pas connecté, la page est inaccessible.', 'danger');
+
+            return $this->redirect($this->get('router')->generatePath('index'));
+        }
+
         /** @var UserManager $userManager */
         $userManager = $this->get('user.manager');
 
-        /** @var UserDeleteForm $formValidator */
-        $formValidator = $this->get('user.delete.form');
-
         if (Request::POST === $this->request->getHttpMethod()) {
-            if ($formData = $formValidator->validate($this->request)) {
-                // Error during deleting
-                if (!$userManager->delete($formData)) {
-                    // TODO : Error during delete (flag or anything else)
-                }
+            if (!$userManager->delete(['email' => $user->getEmail()])) {
+                $this->addNotification('Une erreur est survenue durant la suppression, votre compte n\'est pas supprimé.', 'danger');
 
-                return $this->redirect($this->get('router')->generatePath('index'));
-            } else {
-                // form invalid
-                // TODO : Error during delete (flag or anything else)
+                return $this->redirect($this->get('router')->generatePath('user.edit'));
             }
+
+            $authenticator->disconnect();
+
+            return $this->redirect($this->get('router')->generatePath('index'));
         }
 
-        return new Response('Pas post');
+        return $this->redirect($this->get('router')->generatePath('user.edit'));
     }
 }
