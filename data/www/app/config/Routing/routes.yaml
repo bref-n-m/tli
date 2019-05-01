@@ -23,6 +23,10 @@ routes:
     path: '/login'
     controller: 'App\Controller\AuthenticatorController::login'
 
+  logout:
+    path: '/logout'
+    controller: 'App\Controller\AuthenticatorController::logout'
+
   pathology:
     path: '/pathology'
     controller: 'App\Controller\PathologyController::index'
