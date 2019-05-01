@@ -14,8 +14,8 @@ class UserEditForm extends AbstractForm
     protected function build(): array
     {
         return [
-            'first_name'       => '.{1,50}',
-            'last_name'        => '.{1,50}',
+            'first_name' => '.{1,50}',
+            'last_name'  => '.{1,50}',
         ];
     }
 }
