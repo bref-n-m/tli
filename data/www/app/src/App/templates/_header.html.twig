@@ -6,7 +6,15 @@
         <a href={{ path('symptom') }}>Symptômes</a>
         <a href={{ path('pathology') }}>Pathologies</a>
         <a href={{ path('pathology.search') }}>Recherche de pathologies</a>
-        <a href={{ path('login') }}>Se connecter</a>
-        <a href={{ path('user.register') }}>S'enregistrer</a>
+
+        <div class="right">
+            {% if user %}
+                <a href={{ path('user.edit') }}>{{ user.firstName }} {{ user.lastName }}</a>
+                <a href={{ path('logout') }}>Déconnexion</a>
+            {% else %}
+                <a href={{ path('user.register') }}>S'enregistrer</a>
+                <a href={{ path('login') }}>Connexion</a>
+            {% endif %}
+        </div>
     </nav>
 </header>
