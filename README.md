@@ -4,6 +4,7 @@
   * [Récupérer les sources](#récupérer-les-sources)
   * [Lancer la stack docker](#lancer-la-stack-docker)
   * [Déscription des services](#déscription-des-services)
+  * [Authentification](#authentification)
 * [Générer la documentation PHP](#générer-la-documentation-php)
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
@@ -61,6 +62,15 @@ Ce service écoute sur le port 3306 de votre machine.
 Comme dit précédemment ce service est uniquement basé sur l'image *phpmyadmin/phpmyadmin*, nous n'avons pas créé de *Dockerfile* spécifique pour celui-ci.  
 Ce service écoute sur le port 8080 de votre machine.
 
+### Authentification
+
+Lors de l'initialisation de la base de données, un utilisateur est créé afin de s'authentifier sur l'application web.
+
+**Identifiants**
+```
+Email : user@gmail.com
+Mot de passe : user07
+```
 ## Générer la documentation PHP
 Pour générer la documentation PHP avec [phpDocumentor](https://www.phpdoc.org/), il suffit de lancer la commande `make phpDocumentor`. La documentation se trouvera alors dans le dossier `doc/phpDocumentor/`. Le dossier `Twig/` est exclus de la documentation.
 
