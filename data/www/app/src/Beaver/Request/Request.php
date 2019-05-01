@@ -35,7 +35,7 @@ class Request
     /**
      * @param string $key
      *
-     * @return string
+     * @return object
      */
     public function getSessionValue(string $key)
     {
@@ -44,11 +44,11 @@ class Request
 
     /**
      * @param string $key
-     * @param string $value
+     * @param $value
      *
      * @return string
      */
-    public function setSessionValue(string $key, string $value)
+    public function setSessionValue(string $key, $value)
     {
         $_SESSION[$key] = $value;
     }

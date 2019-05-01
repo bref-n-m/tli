@@ -14,3 +14,8 @@ services:
       $userRepository: '@repository.user'
       $hasher: '@hasher'
       $request: '@request'
+
+  notificator:
+    class: 'App\Service\Notificator'
+    parameters:
+      $request: '@request'
