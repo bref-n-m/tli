@@ -24,17 +24,21 @@ class UserController extends AbstractController
             if ($formData = $formValidator->validate($this->request)) {
                 // Error during insertion
                 if (!$userManager->register($formData)) {
-                    // TODO : Error during insertion (flag or anything else)
+                    $this->addNotification('Un problème est survenu durant l\'enregistrement ! Veuillez vérifier que les mots de passe sont identiques !', 'danger');
+
+                    return $this->render('user/register.html.twig');
                 }
+                $this->addNotification('Votre compte à bien été créé, pensez à vous connecter !', 'success');
 
                 return $this->redirect($this->get('router')->generatePath('index'));
             } else {
-                // form invalid
-                // TODO : Error during insertion (flag or anything else)
+                $this->addNotification('Certains champs n\'ont pas le format attendu', 'danger');
+
+                return $this->render('user/register.html.twig');
             }
         }
 
-        return new Response('Pas post');
+        return $this->render('user/register.html.twig');
     }
 
     public function edit()

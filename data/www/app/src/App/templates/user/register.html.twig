@@ -1,50 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <h3> Nouveau compte </h3>
-<form method="post" action="./index.php" class="creation">
-    <label for="prenom">
+<form method="post" action="" class="creation">
+    <label for="first_name">
         Prenom :
         <br />
-        <input tabindex="1" type="text" name="prenom" id="prenom" />
+        <input tabindex="1" type="text" name="first_name" id="first_name" />
     </label>
     <br />
     <br />
-    <label for="nom">
+    <label for="last_name">
         Nom :
         <br />
-        <input tabindex="2" type="text" name="nom" id="nom" />
+        <input tabindex="2" type="text" name="last_name" id="last_name" />
     </label>
     <br />
     <br />
-    <label for="mail">
+    <label for="email">
         Adresse mail :
         <br />
-        <input tabindex="3" type="text" name="mail" id="mail" />
+        <input tabindex="3" type="text" name="email" id="email" />
     </label>
     <br />
     <br />
-    <label for="identifiant">
-        Identifiant :
-        <br />
-        <input tabindex="4" type="text" name="identifiant" id="identifiant" />
-    </label>
-    <br />
-    <br />
-    <label for="mot_de_passe">
+    <label for="password">
         Mot de passe :
         <br />
-        <input tabindex="5" type="password" name="mot_de_passe" id="mot_de_passe" />
+        <input tabindex="4" type="password" name="password" id="password" />
     </label>
     <br />
     <br />
-    <label for="conf_mot_de_passe">
+    <label for="password_confirm">
         Confirmation du mot de passe :
         <br />
-        <input tabindex="6" type="password" name="conf_mot_de_passe" id="conf_mot_de_passe" />
+        <input tabindex="5" type="password" name="password_confirm" id="password_confirm" />
     </label>
     <br />
     <br />
-    <input tabindex="7" type="submit" name="valider" value="Valider" />
-    <input tabindex="8" type="reset" name="reinitialiser" value="Réinitialiser" />
+    <input tabindex="6" type="reset" name="reset" value="Réinitialiser" />
+    <input tabindex="7" type="submit" name="submit" value="Valider" />
 </form>
 {% endblock %}
