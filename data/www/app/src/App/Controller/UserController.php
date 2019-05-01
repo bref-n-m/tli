@@ -84,6 +84,45 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function editPassword()
+    {
+        /** @var Authenticator $authenticator */
+        $authenticator = $this->get('authenticator');
+        /** @var User $user */
+        $user = $authenticator->getUser();
+
+        if (!$user) {
+            $this->addNotification('Vous n\'etes pas connecté, la page est inaccessible.', 'danger');
+            return $this->redirect($this->get('router')->generatePath('index'));
+        }
+
+        /** @var UserManager $userManager */
+        $userManager = $this->get('user.manager');
+
+        /** @var UserEditForm $formValidator */
+        $formValidator = $this->get('user.editPassword.form');
+
+        if (Request::POST === $this->request->getHttpMethod()) {
+            if ($formData = $formValidator->validate($this->request)) {
+                $formData['email'] = $user->getEmail();
+                // Error during updating
+                if (!$userManager->updatePassword($formData)) {
+                    $this->addNotification('Un problème est survenu durant l\'enregistrement !', 'danger');
+                    return $this->render('user/edit.html.twig');
+                }
+
+                $this->addNotification('Votre mot de passe à été modifié !', 'success');
+                return $this->redirect($this->get('router')->generatePath('user.edit'));
+            }
+            else {
+                $this->addNotification('Certains champs n\'ont pas le format attendu', 'danger');
+                return $this->render('user/edit.html.twig');
+            }
+        }
+
+        return $this->render('user/editPassword.html.twig');
+    }
+
     public function delete()
     {
         /** @var UserManager $userManager */

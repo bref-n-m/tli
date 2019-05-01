@@ -3,5 +3,7 @@ services:
       class: 'App\Form\UserRegisterForm'
   'user.edit.form':
       class: 'App\Form\UserEditForm'
+  'user.editPassword.form':
+      class: 'App\Form\UserEditPasswordForm'
   'user.delete.form':
       class: 'App\Form\UserDeleteForm'

@@ -52,6 +52,18 @@ class UserManager
      * @param array $userParams
      *
      * @return bool
+     */
+    public function updatePassword(array $userParams): bool
+    {
+        $userParams = $this->formatData($userParams);
+
+        return !$userParams ? false : $this->userRepository->update($userParams, self::UNIQUE_KEY);
+    }
+
+    /**
+     * @param array $userParams
+     *
+     * @return bool
      *
      * @throws \ReflectionException
      */

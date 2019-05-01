@@ -4,8 +4,9 @@ namespace App\Form;
 
 use Beaver\AbstractForm;
 
-class UserEditForm extends AbstractForm
+class UserEditPasswordForm extends AbstractForm
 {
+
     /**
      * return the config of the form
      *
@@ -14,8 +15,8 @@ class UserEditForm extends AbstractForm
     protected function build(): array
     {
         return [
-            'first_name' => '.{1,50}',
-            'last_name'  => '.{1,50}',
+            'password'         => '.{6,100}',
+            'password_confirm' => '.{6,100}',
         ];
     }
 }
