@@ -60,7 +60,7 @@
 
         function consumeAPI(keywords) {
             $.post({
-                url: '{{ apiSearchUri }}',
+                url: '{{ path('api.searchByKeywords') }}',
                 data: {
                     'keywords': JSON.stringify(keywords),
                 },

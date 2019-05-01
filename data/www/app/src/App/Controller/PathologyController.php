@@ -28,9 +28,7 @@ class PathologyController extends AbstractController
         /** @var Router $router */
         $router = $this->get('router');
 
-        return $this->render('pathology/search.html.twig', [
-            'apiSearchUri' => $router->generatePath('api.searchByKeywords')
-        ]);
+        return $this->render('pathology/search.html.twig');
     }
 
     public function apiSearchByKeywords()
