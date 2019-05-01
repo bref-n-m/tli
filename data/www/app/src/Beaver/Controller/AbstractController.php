@@ -2,6 +2,7 @@
 
 namespace Beaver\Controller;
 
+use App\Auth\Authenticator;
 use Beaver\Container;
 use Beaver\Request\Request;
 use Beaver\Response\Response;
@@ -56,9 +57,17 @@ abstract class AbstractController
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
+     * @throws \ReflectionException
      */
     protected function render(string $template, array $params = [], int $status = Response::HTTP_OK)
     {
+        /** @var Authenticator $authenticator */
+        $authenticator = $this->get('authenticator');
+
+        $params = array_merge($params, [
+            'user' => $authenticator->getUser(),
+        ]);
+
         return new Response(
             $this->twig->render($template, $params),
             $status
