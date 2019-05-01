@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h3> Modification de compte </h3>
+<form method="post" action="./index.php" class="modification">
+    <label for="prenom">
+        Prenom :
+        <br />
+        <input tabindex="1" type="text" name="prenom" id="prenom" />
+    </label>
+    <br />
+    <br />
+    <label for="nom">
+        Nom :
+        <br />
+        <input tabindex="2" type="text" name="nom" id="nom" />
+    </label>
+    <br />
+    <br />
+    <label for="mail">
+        Adresse mail :
+        <br />
+        <input tabindex="3" type="text" name="mail" id="mail" disabled="disabled"/>
+    </label>
+    <br />
+    <br />
+    <label for="mot_de_passe">
+        Mot de passe :
+        <br />
+        <input tabindex="4" type="password" name="mot_de_passe" id="mot_de_passe" />
+    </label>
+    <br />
+    <br />
+    <label for="conf_mot_de_passe">
+        Confirmation du mot de passe :
+        <br />
+        <input tabindex="5" type="password" name="conf_mot_de_passe" id="conf_mot_de_passe" />
+    </label>
+    <br />
+    <br />
+    <input tabindex="6" type="submit" name="valider" value="Valider" />
+    <input tabindex="7" type="submit" name="annuler" value="Annuler" />
+</form>
+{% endblock %}

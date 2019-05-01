@@ -9,6 +9,20 @@ use Beaver\Router;
 
 class PathologyController extends AbstractController
 {
+    public function index()
+    {
+        return $this->render('pathology/index.html.twig', [
+            'name' => 'Beaver',
+        ]);
+    }
+
+    public function search()
+    {
+        return $this->render('pathology/search.html.twig', [
+            'name' => 'Beaver',
+        ]);
+    }
+
     public function searchByKeywords()
     {
         /** @var Router $router */
