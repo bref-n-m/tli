@@ -1,5 +1,9 @@
 # Projet TLI
 
+* [Installer le projet](#installer-le-projet)
+  * [Récupérer les sources](#récupérer-les-sources)
+  * [Lancer la stack docker](#lancer-la-stack-docker)
+  * [Déscription des services](#déscription-des-services)
 * [Injection de dépendance](#injection-de-dépendance)
   * [Classe correspondant au service `rs6`](#classe-correspondant-au-service-rs6)
 * [Routing](#routing)
@@ -13,6 +17,48 @@
   * [Grid](#grid)
   * [Miscellaneous](#miscellaneous)
 * [Base de données](#base-de-données)
+
+## Installer le projet
+### Récupérer les sources
+La première étape est de cloner le repository afin d'obtenir les sources du projet, jusqu'ici rien de bien compliqué.  
+Pour rappel :
+```
+SSH : git clone git@github.com:bref-n-m/tli.git
+HTTPS : git clone https://github.com/bref-n-m/tli.git
+```
+### Lancer la stack docker
+Nous avons décidé d'utiliser **docker compose** pour gérer les différents services de notre projet.  
+Le fichier *docker-compose.yml* se trouvant à la racine du projet nous permet de mettre en place l'environnement de celui-ci.  
+Une simple commande et c'est parti !
+```
+docker-compose up -d
+```
+Cette commande va lancer les 3 services liés à notre application, à savoir :
+- serveur-php
+- mysql
+- myadmin
+
+### Déscription des services
+Nous avons créé un *Dockerfile* pour le service **serveur-php** et un pour **mysql**. Le service **myadmin** quant à lui est basé uniquement sur l'image *phpmyadmin/phpmyadmin*.  
+Les différents *Dockerfiles* sont accessibles dans le dossier **services/**.
+
+#### serveur-php
+*Lien vers le Dockerfile : **services/php-apache/Dockerfile***  
+
+Ce service est basé sur l'image *php:7.3-apache*, nous avons ensuite ajouté nos différentes configurations et les extentions php que nous utilisons, à savoir les extentions *php_mysql* et *yamL*.  
+
+Ce service écoute sur le port 80 de votre machine. 
+
+#### mysql
+*Lien vers le Dockerfile : **services/db/Dockerfile***  
+
+Ce service est basé sur l'image *mysql:5*, nous avons ensuite ajouté le script sql **init.sql** au service pour initiliser la base de données à son lancement.  
+
+Ce service écoute sur le port 3306 de votre machine. 
+
+#### myadmin
+Comme dit précédemment ce service est uniquement basé sur l'image *phpmyadmin/phpmyadmin*, nous n'avons pas créé de *Dockerfile* spécifique pour celui-ci.  
+Ce service écoute sur le port 8080 de votre machine.
 
 ## Injection de dépendance
 L'injection de dépendance c'est quoi ?
