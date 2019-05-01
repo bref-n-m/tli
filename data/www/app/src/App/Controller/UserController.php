@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Auth\Authenticator;
 use App\Auth\UserManager;
+use App\Entity\User;
 use App\Form\UserDeleteForm;
 use App\Form\UserEditForm;
 use App\Form\UserRegisterForm;
@@ -43,6 +45,16 @@ class UserController extends AbstractController
 
     public function edit()
     {
+        /** @var Authenticator $authenticator */
+        $authenticator = $this->get('authenticator');
+        /** @var User $user */
+        $user = $authenticator->getUser();
+
+        if (!$user) {
+            $this->addNotification('Vous n\'etes pas connecté, la page est inaccessible.', 'danger');
+            return $this->redirect($this->get('router')->generatePath('index'));
+        }
+
         /** @var UserManager $userManager */
         $userManager = $this->get('user.manager');
 
@@ -51,19 +63,25 @@ class UserController extends AbstractController
 
         if (Request::POST === $this->request->getHttpMethod()) {
             if ($formData = $formValidator->validate($this->request)) {
+                $formData['email'] = $user->getEmail();
                 // Error during updating
                 if (!$userManager->update($formData)) {
-                    // TODO : Error during update (flag or anything else)
+                    $this->addNotification('Un problème est survenu durant l\'enregistrement !', 'danger');
+                    return $this->render('user/edit.html.twig');
                 }
 
-                return $this->redirect($this->get('router')->generatePath('index'));
-            } else {
-                // form invalid
-                // TODO : Error during update (flag or anything else)
+                $this->addNotification('Votre compte à bien été modifié !', 'success');
+                return $this->redirect($this->get('router')->generatePath('user.edit'));
+            }
+            else {
+                $this->addNotification('Certains champs n\'ont pas le format attendu', 'danger');
+                return $this->render('user/edit.html.twig');
             }
         }
 
-        return new Response('Pas post');
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+        ]);
     }
 
     public function delete()

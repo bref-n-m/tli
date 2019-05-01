@@ -212,7 +212,7 @@ abstract class AbstractRepository
             return false;
         }
 
-        $query = 'UPDATE ' . $this->tableName . '` SET ';
+        $query = 'UPDATE `' . $this->tableName . '` SET ';
 
         foreach ($params as $columnName => $value) {
             $query .= '`' . $columnName . '` = :' . $columnName;
