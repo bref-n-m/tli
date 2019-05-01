@@ -3,9 +3,17 @@ routes:
     path: '/'
     controller: 'App\Controller\DefaultController::index'
 
-  register:
-    path: '/register'
+  user.register:
+    path: '/user/register'
     controller: 'App\Controller\UserController::register'
+
+  user.edit:
+    path: '/user/edit'
+    controller: 'App\Controller\UserController::edit'
+
+  user.delete:
+    path: '/user/delete'
+    controller: 'App\Controller\UserController::delete'
 
   searchByKeywords:
     path: '/pathology/searchByKeywords'
