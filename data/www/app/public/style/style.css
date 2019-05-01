@@ -2,6 +2,15 @@
     visibility: collapse;
 }
 
+/* Recherche de pathologies */
+.search {
+    margin-bottom: 1rem;
+}
+
+.search input, .search button {
+    width: 100%;
+}
+
 table.pathologies {
     width: 100%;
 }

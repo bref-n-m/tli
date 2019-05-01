@@ -1,27 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row ">
+    <div class="row">
         <div class="col-s-12">
             <div class="card">
                 <div class="card-header">
                     <h1>Recherche de pathologies par mot-clef</h1>
                 </div>
                 <div class="card-body">
-                    <div class="search">
+                    <div class="search row">
                         <form class="form" id="search" action="#">
-                            <input type="text" id="keywords" placeholder="Mots clés séparés par des espaces" autocomplete="off">
-                            <button class="button success">Recherche</button>
+                            <div class="col-s-12 col-m-9">
+                                <input type="text" id="keywords" placeholder="Mots clés séparés par des espaces" autocomplete="off">
+                            </div>
+                            <div class="col-s-12 col-m-3">
+                                <button class="button success">Recherche</button>
+                            </div>
                         </form>
                     </div>
 
                     <table class="table table-stripped pathologies collapse">
                         <tr>
                             <th>Description</th>
-                            <th>Type</th>
-                            <th>Méridien</th>
-                            <th>Symptôme</th>
-                            <th>Yin Yang</th>
+                            <th class="col-s-hidden">Type</th>
+                            <th class="col-s-hidden">Méridien</th>
+                            <th class="col-s-hidden">Symptôme</th>
+                            <th class="col-s-hidden">Yin Yang</th>
                             <th>Lien</th>
                         </tr>
                     </table>
@@ -74,10 +78,10 @@
                     data.pathologies.forEach(function (pathology) {
                         let pathologyTemplate = `<tr>
                             <td>${pathology.pathoDesc}</td>
-                            <td>${pathology.pathoType}</td>
-                            <td>${pathology.merNom}</td>
-                            <td>${pathology.symptDesc}</td>
-                            <td>${1 == pathology.yin ? 'Yin' : 'Yang'}</td>
+                            <td class="col-s-hidden">${pathology.pathoType}</td>
+                            <td class="col-s-hidden">${pathology.merNom}</td>
+                            <td class="col-s-hidden">${pathology.symptDesc}</td>
+                            <td class="col-s-hidden">${1 == pathology.yin ? 'Yin' : 'Yang'}</td>
                             <td class="center"><a href="" class="button info">Consulter</a></td>
                         </tr>`;
                         $('.pathologies').append(pathologyTemplate);

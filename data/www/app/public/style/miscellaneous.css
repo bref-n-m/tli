@@ -15,7 +15,6 @@
     font-size: 1rem;
     line-height: 1.5;
 
-    overflow: visible;
     min-width: 6rem;
 }
 .button.success {
@@ -105,3 +104,22 @@ h3{
 }
 
 /* Formulaires */
+form {
+    margin: 0;
+    padding: 0;
+}
+
+form.form input {
+    margin: .375rem 0;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    min-width: 6rem;
+
+    border: 1px solid var(--bloc-border-color);
+}
+
+form.form button {
+    margin: .375rem 0;
+}
