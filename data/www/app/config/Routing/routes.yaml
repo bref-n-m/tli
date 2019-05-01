@@ -3,6 +3,10 @@ routes:
     path: '/'
     controller: 'App\Controller\DefaultController::index'
 
+  information:
+    path: '/information'
+    controller: 'App\Controller\DefaultController::information'
+
   user.register:
     path: '/user/register'
     controller: 'App\Controller\UserController::register'
@@ -15,6 +19,18 @@ routes:
     path: '/user/delete'
     controller: 'App\Controller\UserController::delete'
 
+  login:
+    path: '/login'
+    controller: 'App\Controller\AuthenticatorController::login'
+
+  pathology:
+    path: '/pathology'
+    controller: 'App\Controller\PathologyController::index'
+
+  pathology.search:
+    path: '/pathology/search'
+    controller: 'App\Controller\PathologyController::search'
+
   searchByKeywords:
     path: '/pathology/searchByKeywords'
     controller: 'App\Controller\PathologyController::searchByKeywords'
@@ -24,40 +40,13 @@ routes:
     controller: 'App\Controller\PathologyController::apiSearchByKeywords'
     method: 'POST'
 
+  symptom:
+    path: '/symptom'
+    controller: 'App\Controller\SymptomController::index'
+
   # 404 special route
   fallbackRoute:
     path: '/:uri'
     controller: 'App\Controller\ErrorController::notFound'
     parameters:
       uri: '.*'
-
-  complex:
-    path: '/some/complex/route/:id-:slug'
-    controller: 'App\Controller\DefaultController::complex'
-    parameters:
-      slug: '[a-zA-Z\-]+'
-      id: '\d+'
-
-  register:
-    path: '/register'
-    controller: 'App\Controller\UserController::register'
-
-  information:
-    path: '/information'
-    controller: 'App\Controller\DefaultController::information'
-
-  symptomes:
-    path: '/symptomes'
-    controller: 'App\Controller\DefaultController::symptomes'
-
-  pathologie:
-    path: '/pathologie'
-    controller: 'App\Controller\DefaultController::pathologie'
-
-  recherche:
-    path: '/recherche'
-    controller: 'App\Controller\DefaultController::recherche'
-
-  connection:
-    path: '/connection'
-    controller: 'App\Controller\DefaultController::connection'

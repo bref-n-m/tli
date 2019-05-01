@@ -1,3 +1,5 @@
+{% extends 'base.html.twig' %}
+{% block body %}
 <h3> Nouveau compte </h3>
 <form method="post" action="./index.php" class="creation">
     <label for="prenom">
@@ -45,3 +47,4 @@
     <input tabindex="7" type="submit" name="valider" value="Valider" />
     <input tabindex="8" type="reset" name="reinitialiser" value="Réinitialiser" />
 </form>
+{% endblock %}
