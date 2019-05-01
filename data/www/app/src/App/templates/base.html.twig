@@ -25,6 +25,8 @@
             <div class="site-pusher">
                 <div class="site-content">
                     <div class="container">
+                        {% include '_notifications.html.twig' %}
+
                         {# Redifine this block in children #}
                         {% block body %}
                         {% endblock %}
