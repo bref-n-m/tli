@@ -61,8 +61,10 @@ class PathologyController extends AbstractController
         $filters = $this->request->getPostValue('filters');
         $filters = $filters ? json_decode($filters) : [];
 
+        $pathologies = $filters ? $pathologyRepository->findByFilters($filters) : $pathologyRepository->findAll();
+
         return new JsonResponse([
-            'pathologies' => $pathologyRepository->findByFilters($filters)
+            'pathologies' => $pathologies,
         ]);
     }
 }

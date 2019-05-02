@@ -35,6 +35,11 @@ routes:
     path: '/pathology'
     controller: 'App\Controller\PathologyController::index'
 
+  api.filterByMeridian:
+    path: '/api/filterByMeridian'
+    controller: 'App\Controller\PathologyController::apiFilterByMeridian'
+    method: 'POST'
+
   pathology.searchByKeywords:
     path: '/pathology/searchByKeywords'
     controller: 'App\Controller\PathologyController::searchByKeywords'
@@ -42,11 +47,6 @@ routes:
   api.searchByKeywords:
     path: '/api/searchByKeywords'
     controller: 'App\Controller\PathologyController::apiSearchByKeywords'
-    method: 'POST'
-
-  api.filterByMeridian:
-    path: '/api/filterByMeridian'
-    controller: 'App\Controller\PathologyController::apiFilterByMeridian'
     method: 'POST'
 
   symptom:
