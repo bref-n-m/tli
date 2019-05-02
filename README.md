@@ -1,5 +1,9 @@
 # Projet TLI
 
+* [Initialiser la VM pour les machines à CPE](#initialiser-la-vm-pour-les-machines-à-cpe)
+  * [Lancer la VM](#lancer-la-vm)
+  * [Installation de docker](#installation-de-docker)
+  * [Upgrade de docker-compose](#upgrade-de-docker-compose)
 * [Installer le projet](#installer-le-projet)
   * [Récupérer les sources](#récupérer-les-sources)
   * [Lancer la stack docker](#lancer-la-stack-docker)
@@ -20,6 +24,66 @@
   * [Miscellaneous](#miscellaneous)
 * [Base de données](#base-de-données)
 
+## Initialiser la VM pour les machines à CPE
+### Lancer la VM
+Sur les PCs de CPE il est nécessaire d'utiliser une VM, docker étant bloqué sur les machines.  
+1. Lancer la VM nommée **ubuntu-tli** dans le dossier */softwares/sync/VMs/*
+2. Se connecter 
+```
+Identifiant : tp
+Mot de passe : tp
+```
+### Installation de docker
+Passer en super utilisateur
+```
+su
+```
+Mettre à jour les packages
+```
+apt-get update
+```
+Installer les packages nécessaires pour docker
+```
+apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+Ajouter les clés GPG de docker
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+```
+Ajouter le dépôt docker
+```
+ add-apt-repository \
+     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+     $(lsb_release -cs) \
+     stable"
+```
+Installer docker
+```
+apt-get update  
+apt-get install docker-ce
+```
+### Upgrade de docker-compose
+*Nous utilisons la version 3 de **docker-compose**, cependant la version présente sur la VM ne supporte pas la version 3, nous devons l'upgrade.*  
+
+Supprimer la version présente
+```
+rm /usr/bin/docker-compose
+```
+Installer la version 1.11.1 de **docker-compose**
+```
+curl -L https://github.com/docker/compose/releases/download/1.11.1/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose
+```
+Rendre docker-compose executable
+```
+chmod +x /usr/bin/docker-compose
+```
+Nous avons installé **docker** et **docker-compose**, nous pouvons donc maintenant installer le projet !
+
 ## Installer le projet
 ### Récupérer les sources
 La première étape est de cloner le repository afin d'obtenir les sources du projet, jusqu'ici rien de bien compliqué.  
@@ -28,6 +92,7 @@ Pour rappel :
 SSH : git clone git@github.com:bref-n-m/tli.git
 HTTPS : git clone https://github.com/bref-n-m/tli.git
 ```
+
 ### Lancer la stack docker
 Nous avons décidé d'utiliser **docker compose** pour gérer les différents services de notre projet.  
 Le fichier *docker-compose.yml* se trouvant à la racine du projet nous permet de mettre en place l'environnement de celui-ci.  
