@@ -3,7 +3,7 @@
 {% block body %}
 <h1> Symptômes </h1>
     <ul>
-    {% for symptom in symptoms %}
+    {% for symptom in symptoms.res %}
         <li>{{ symptom.desc }}</li>
     {% endfor %}
     </ul>
