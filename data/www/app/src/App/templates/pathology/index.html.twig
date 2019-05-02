@@ -44,18 +44,23 @@
         $(document).ready(function () {
             var input = document.getElementsByTagName("input");
             let filters = location.hash;
-            filters = filters.slice(1, filters.length);
-            filters = unescape(filters);
-            filters = filters.split(",");
-            filters.forEach(function (filter) {
-                for(var i = 0; i < input.length; i++) {
-                    if (input[i].value == filter){
-                        input[i].checked = true
+
+            if (filters && '#' !== filters) {
+                filters = filters.slice(1, filters.length);
+                filters = unescape(filters);
+                filters = filters.split(",");
+                filters.forEach(function (filter) {
+                    for(var i = 0; i < input.length; i++) {
+                        if (input[i].value == filter){
+                            input[i].checked = true
+                        }
                     }
-                }
-            })
+                });
+            }
+
             consumeAPI(filters);
         });
+
         $('#search').submit(function (e) {
             e.preventDefault();
             var filters = [];
