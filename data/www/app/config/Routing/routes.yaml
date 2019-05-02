@@ -54,3 +54,8 @@ routes:
     controller: 'App\Controller\ErrorController::notFound'
     parameters:
       uri: '.*'
+
+  api.filterByMeridian:
+    path: '/api/filterByMeridian'
+    controller: 'App\Controller\PathologyController::apiFilterByMeridian'
+    method: 'POST'
