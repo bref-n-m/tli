@@ -13,10 +13,10 @@
                         <ul class="liste_deroulante">
                             {% set index = 1 %}
                             {% for meridian in meridians %}
-                                <label class="checkbox_meridian">{{ meridian.nom }}
-                                    <input tabindex="{{ index }}" name="meridian_list" type="checkbox" value="{{ meridian.nom }}">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <li>
+                                    <input id="{{ meridian.nom ~ index }}" class="input_meridian" tabindex="{{ index }}" name="meridian_list" type="checkbox" value="{{ meridian.nom }}">
+                                    <label for="{{ meridian.nom ~ index }}">{{ meridian.nom }}</label>
+                                </li>
                                 {% set index = index + 1 %}
                             {% endfor %}
                         </ul>

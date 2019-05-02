@@ -161,77 +161,8 @@ form.form ul{
     overflow-y: scroll;
 }
 
-/* Customize the label (the container) */
-.checkbox_meridian {
-    display: block;
-    position: relative;
-    padding-left: 18px;
-    padding-bottom: 10px;
-    margin: 0px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.checkbox_meridian input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    margin: 0px;
-    top: 0;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    background-color: var(--bloc-background-color);
-}
-
-/* On mouse-over, add a grey background color */
-.checkbox_meridian:hover input ~ .checkmark {
-    background-color: var(--bloc-background-color);
-    border: solid 1px var(--bloc-border-color);
-}
-
-/* When the checkbox is checked, add a blue background */
-.checkbox_meridian input:checked ~ .checkmark {
-    background-color: var(--bloc-border-color);
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.checkbox_meridian input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.checkbox_meridian .checkmark:after {
-    left: 4px;
-    top: 1px;
-    width: 2px;
-    height: 8px;
-    border: solid var(--bloc-background-color);
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+.input_meridian {
+    margin-right: 5px !important;
 }
 
 form button.search_meridian {
@@ -240,5 +171,6 @@ form button.search_meridian {
 }
 
 form.form .liste_deroulante{
+    list-style-type: none;
     border: 1px solid var(--bloc-border-color);
 }
