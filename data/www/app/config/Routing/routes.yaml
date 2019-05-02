@@ -48,14 +48,14 @@ routes:
     path: '/symptom'
     controller: 'App\Controller\SymptomController::index'
 
+  api.filterByMeridian:
+    path: '/api/filterByMeridian'
+    controller: 'App\Controller\PathologyController::apiFilterByMeridian'
+    method: 'POST'
+
   # 404 special route
   fallbackRoute:
     path: '/:uri'
     controller: 'App\Controller\ErrorController::notFound'
     parameters:
       uri: '.*'
-
-  api.filterByMeridian:
-    path: '/api/filterByMeridian'
-    controller: 'App\Controller\PathologyController::apiFilterByMeridian'
-    method: 'POST'

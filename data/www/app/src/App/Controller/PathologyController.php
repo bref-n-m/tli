@@ -12,8 +12,11 @@ class PathologyController extends AbstractController
 {
     public function index()
     {
+        /** @var MeridianRepository $meridianRepository */
+
+        $meridianRepository = $this->get('repository.meridian');
         return $this->render('pathology/index.html.twig', [
-            'name' => 'Beaver',
+            'meridians' => $meridianRepository->getAll(),
         ]);
     }
 
@@ -47,6 +50,19 @@ class PathologyController extends AbstractController
 
         return new JsonResponse([
             'pathologies' => $pathologyRepository->findByKeyWords($keywords)
+        ]);
+    }
+
+    public function apiFilterByMeridian()
+    {
+        /** @var PathologyRepository $pathologyRepository */
+        $pathologyRepository = $this->get('repository.pathology');
+
+        $filters = $this->request->getPostValue('filters');
+        $filters = $filters ? json_decode($filters) : [];
+
+        return new JsonResponse([
+            'pathologies' => $pathologyRepository->findByFilters($filters)
         ]);
     }
 }

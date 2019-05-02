@@ -10,7 +10,6 @@
                 </div>
                 <div class="card-body">
                     <form class="form" id="search">
-
                         <ul class="liste_deroulante">
                             {% set index = 1 %}
                             {% for meridian in meridians %}
@@ -27,8 +26,6 @@
             </div>
         </div>
     </div>
-
-    <br>
     <table class="table table-stripped pathologies collapse">
         <tr>
             <th>Description</th>
@@ -46,7 +43,6 @@
     <script>
         $(document).ready(function () {
             var input = document.getElementsByTagName("input");
-
             let filters = location.hash;
             filters = filters.slice(1, filters.length);
             filters = unescape(filters);
@@ -60,13 +56,12 @@
             })
             consumeAPI(filters);
         });
-
         $('#search').submit(function (e) {
+            e.preventDefault();
             var filters = [];
             $.each($("input[name='meridian_list']:checked"), function() {
                 filters.push($(this).val());
             });
-            e.preventDefault();
             let hash = escape(filters);
             location.hash = `#${hash}`;
             consumeAPI(filters)
