@@ -79,10 +79,11 @@ header a{
 .menu .right {
     float: right;
     padding: 0 25px;
+    max-width: 22rem;
 }
 
 /* Responsive */
-@media only screen and (max-width: 860px) {
+@media only screen and (max-width: 1140px) {
     .site-container{
         overflow: hidden;
         height: 100%;
