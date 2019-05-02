@@ -78,8 +78,11 @@ class Kernel
         // prepare parameters
         $methodParameters = $reflector->getMethod($action)->getParameters();
         $orderedParameters = [];
+        $routeParameters = $route->getParameters();
         foreach ($methodParameters as $parameter) {
-            $orderedParameters[] = $route->getParameters()[$parameter->getName()];
+            if (array_key_exists($parameter->getName(), $routeParameters)) {
+                $orderedParameters[] = $routeParameters[$parameter->getName()];
+            }
         }
 
         // add special service to the container

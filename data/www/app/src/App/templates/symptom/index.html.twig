@@ -1,10 +1,47 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Symptômes{% endblock %}
+
 {% block body %}
-<h1> Symptômes </h1>
-    <ul>
-    {% for symptom in symptoms %}
-        <li>{{ symptom.desc }}</li>
-    {% endfor %}
-    </ul>
+    <div class="card symptoms">
+        <div class="card-header">
+            <h1>Symptômes</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-m-8 col-m-push-2 col-l-6 col-l-push-3">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Symptôme</th>
+                        </tr>
+                        {% for symptom in symptoms.res %}
+                            <tr>
+                                <td>{{ symptom.desc }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer center">
+            {% if symptoms.pagination.currentPage > 1 %}
+                <a href="{{ path('symptom.page', { 'page': 1 }) }}" class="button info">Début</a>
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.currentPage - 1 }) }}" class="button info">Précédent</a>
+            {% else %}
+                <a href="{{ path('symptom.page', { 'page': 1 }) }}" class="button secondary">Début</a>
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.currentPage - 1 }) }}" class="button secondary">Précédent</a>
+            {% endif %}
+
+            <a href="{{ path('symptom.page', { 'page': symptoms.pagination.currentPage }) }}" class="button info">Page {{ symptoms.pagination.currentPage }} sur {{ symptoms.pagination.pageMax }}</a>
+
+            {% if symptoms.pagination.currentPage < symptoms.pagination.pageMax %}
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.currentPage + 1 }) }}" class="button info">Suivant</a>
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.pageMax }) }}" class="button info">Fin</a>
+            {% else %}
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.currentPage + 1 }) }}" class="button secondary">Suivant</a>
+                <a href="{{ path('symptom.page', { 'page': symptoms.pagination.pageMax }) }}" class="button secondary">Fin</a>
+            {% endif %}
+
+        </div>
+    </div>
 {% endblock %}

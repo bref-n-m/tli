@@ -18,3 +18,10 @@ table.pathologies {
 .center {
     text-align: center;
 }
+
+/* Liste des symptomes */
+@media only screen and (max-width: 640px) {
+    .symptoms.card .card-footer a.button {
+        display: block;
+    }
+}

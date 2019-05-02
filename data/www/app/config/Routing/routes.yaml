@@ -53,6 +53,12 @@ routes:
     path: '/symptom'
     controller: 'App\Controller\SymptomController::index'
 
+  symptom.page:
+    path: '/symptom/:page'
+    controller: 'App\Controller\SymptomController::index'
+    parameters:
+      page: '\d+'
+
   # 404 special route
   fallbackRoute:
     path: '/:uri'

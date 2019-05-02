@@ -7,6 +7,8 @@ use ReflectionClass;
 
 abstract class AbstractRepository
 {
+    const PAGINATION_LIMIT = 15;
+
     /** @var PDO */
     protected $db;
 
@@ -71,6 +73,45 @@ abstract class AbstractRepository
         }
 
         return $res;
+    }
+
+    /**
+     * @param int $currentPage
+     * @param string $orderedBy
+     *
+     * @return array
+     *
+     * @throws \ReflectionException
+     */
+    public function getAllPaginated(int $currentPage, string $orderedBy = ''): array
+    {
+        $res = [];
+
+        // get the entities
+        $query = 'SELECT * FROM `' . $this->tableName . '`';
+        if ($orderedBy) {
+            $query .= 'ORDER BY `' . $orderedBy . '`';
+        }
+        $query .= 'LIMIT ' . self::PAGINATION_LIMIT * $currentPage . ', ' . self::PAGINATION_LIMIT . ';';
+        $stmt = $this->db->query($query);
+
+        $reflector = $this->getReflector();
+
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $res[] = $reflector->newInstanceArgs($row);
+        }
+
+        // get the amount of pages
+        $stmt = $this->db->query('SELECT COUNT(*) as amount FROM `' . $this->tableName . '`');
+        $amount = $stmt->fetch(PDO::FETCH_ASSOC)['amount'];
+
+        return [
+            'pagination' => [
+                'pageMax'     => ceil($amount / self::PAGINATION_LIMIT) - 1,
+                'currentPage' => $currentPage,
+            ],
+            'res'        => $res,
+        ];
     }
 
     /**
