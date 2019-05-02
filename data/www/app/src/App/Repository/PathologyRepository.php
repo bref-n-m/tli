@@ -40,4 +40,38 @@ class PathologyRepository extends AbstractRepository
 
         return $rows;
     }
+
+    /**
+     * @param array $filters
+     *
+     * @return array
+     */
+    public function findByFilters(array $filters): array
+    {
+        // complex code to manage list with pdo, purposely not factorised
+        $inKeywords = [];
+        $in = '';
+        foreach ($filters as $id => $filter) {
+            $key = "keyword$id";
+            $in .= ":$key,";
+            $inKeywords[$key] = $filter;
+        }
+        $in = rtrim($in, ',');
+
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT s.desc as symptDesc, p.type as pathoType, p.desc as pathoDesc, m.nom as merNom, m.yin as yin
+            FROM keywords k
+            JOIN keySympt ks ON k.idK = ks.idK
+            JOIN symptome s ON s.idS = ks.idS
+            JOIN symptPatho sp ON s.idS = sp.idS
+            JOIN patho p ON sp.idP = p.idP
+            JOIN meridien m ON m.code = p.mer
+            WHERE m.nom IN ($in);
+        ");
+
+        $stmt->execute($inKeywords);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
 }

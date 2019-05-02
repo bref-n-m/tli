@@ -160,3 +160,17 @@ form.form ul{
     max-height: 100px;
     overflow-y: scroll;
 }
+
+.input_meridian {
+    margin-right: 5px !important;
+}
+
+form button.search_meridian {
+    display: block;
+    margin: auto;
+}
+
+form.form .liste_deroulante{
+    list-style-type: none;
+    border: 1px solid var(--bloc-border-color);
+}

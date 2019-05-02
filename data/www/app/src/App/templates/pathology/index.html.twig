@@ -2,51 +2,100 @@
 {% block title %}Pathologie{% endblock %}
 {% block body %}
 <h1> Pathologie </h1>
-<!--TODO : Remplir les select avec des requêtes sql-->
-    <div class="card">
-        <div class="card-header">
-            Meridien
-        </div>
-        <div class="card-body">
-            <form class="form">
-
-                <ul>
-                    <tr><input type="checkbox" name="meridien_list" value="Poumon">Poumon<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Ren Mai">Ren Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Rein">Rein<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                    <tr><input type="checkbox" name="meridien_list" value="Yanq Qiao Mai">Yanq Qiao Mai<br></tr>
-                </ul>
-                <!--TODO : Créer une fonction JS pour le bouton-->
-                <input class="button info" type="submit" value="Recherche" />
-            </form>
+    <div class="row">
+        <div class="col-s-12 col-m-6 col-m-center col-l-4 col-l-center">
+            <div class="card">
+                <div class="card-header">
+                    Meridien
+                </div>
+                <div class="card-body">
+                    <form class="form" id="search">
+                        <ul class="liste_deroulante">
+                            {% set index = 1 %}
+                            {% for meridian in meridians %}
+                                <li>
+                                    <input id="{{ meridian.nom ~ index }}" class="input_meridian" tabindex="{{ index }}" name="meridian_list" type="checkbox" value="{{ meridian.nom }}">
+                                    <label for="{{ meridian.nom ~ index }}">{{ meridian.nom }}</label>
+                                </li>
+                                {% set index = index + 1 %}
+                            {% endfor %}
+                        </ul>
+                        <button tabindex="{{ index }}" class="search_meridian button success">Recherche</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-<!--TODO : Afficher les tableaux correspondant-->
-    <br>
+    <table class="table table-stripped pathologies collapse">
+        <tr>
+            <th>Description</th>
+            <th class="col-s-hidden">Type</th>
+            <th class="col-s-hidden">Méridien</th>
+            <th class="col-s-hidden">Symptôme</th>
+            <th class="col-s-hidden">Yin Yang</th>
+        </tr>
+    </table>
+{% endblock %}
 
-    <table>
-    <thead>
-    <tr>
-        <th> Meridien </th>
-        <th> Pathologie </th>
-        <th> Caractéristiques </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td> XXXXX </td>
-        <td> XXXXX </td>
-        <td> XXXXX </td>
-    </tr>
-    </tbody>
-</table>
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            var input = document.getElementsByTagName("input");
+            let filters = location.hash;
+            filters = filters.slice(1, filters.length);
+            filters = unescape(filters);
+            filters = filters.split(",");
+            filters.forEach(function (filter) {
+                for(var i = 0; i < input.length; i++) {
+                    if (input[i].value == filter){
+                        input[i].checked = true
+                    }
+                }
+            })
+            consumeAPI(filters);
+        });
+        $('#search').submit(function (e) {
+            e.preventDefault();
+            var filters = [];
+            $.each($("input[name='meridian_list']:checked"), function() {
+                filters.push($(this).val());
+            });
+            let hash = escape(filters);
+            location.hash = `#${hash}`;
+            consumeAPI(filters)
+        });
+
+        function consumeAPI(filters) {
+            $.post({
+                url: '{{ path('api.filterByMeridian') }}',
+                data: {
+                    'filters': JSON.stringify(filters),
+                },
+                success: function (data) {
+                    $('.pathologies tr:nth-child(1)')
+                        .nextAll().remove();
+
+                    if (0 !== data.pathologies.length) {
+                        $('.pathologies').removeClass('collapse');
+                    }
+                    else {
+                        $('.pathologies').addClass('collapse');
+                    }
+
+                    data.pathologies.forEach(function (pathology) {
+                        let pathologyTemplate = `<tr>
+                            <td>${pathology.pathoDesc}</td>
+                            <td class="col-s-hidden">${pathology.pathoType}</td>
+                            <td class="col-s-hidden">${pathology.merNom}</td>
+                            <td class="col-s-hidden">${pathology.symptDesc}</td>
+                            <td class="col-s-hidden">${1 == pathology.yin ? 'Yin' : 'Yang'}</td>
+                        </tr>`;
+                        $('.pathologies').append(pathologyTemplate);
+                    });
+                },
+            });
+        }
+    </script>
 {% endblock %}
