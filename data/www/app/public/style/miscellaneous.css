@@ -68,7 +68,7 @@ abbr{
 }
 .button.info, .alert.info {
     color: var(--button-white-color);
-    background-color: #597ccc;
+    background-color: var(--bloc-border-color);
 }
 .button.secondary, .alert.secondary {
     color: var(--button-white-color);
