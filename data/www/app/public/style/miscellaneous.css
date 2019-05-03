@@ -1,7 +1,7 @@
 /* Base */
 :root {
     --bloc-background-HF-color: #597ccc2e;
-    --bloc-border-color: #597ccc;
+    --bloc-border-color: #071B7A;
     --bloc-background-color: #FFF;
 
     --button-black-color: #212529;
@@ -56,7 +56,7 @@ abbr{
 }
 .button.danger, .alert.danger {
     color: var(--button-white-color);
-    background-color: #dc3545;
+    background-color: #AC1F34;
 }
 .button.warning, .alert.warning {
     color: var(--button-black-color);

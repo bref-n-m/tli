@@ -1,6 +1,7 @@
 /* Base */
 :root {
-    --header-bg-color: #587CCC;
+    --header-bg-color: #071B7A;
+    --header-hover-color: #b4b4b4;
     --header-second-color: #FFFFFF;
     --header-second-color-dark: #2b2b2b;
     --header-height : 66px;
@@ -72,8 +73,8 @@ header a{
 }
 
 .menu a:hover {
-    color: var(--header-bg-color);
-    filter: brightness(50%);
+    color: var(--header-hover-color);
+    /*filter: brightness(50%);*/
 }
 
 .menu .right {
