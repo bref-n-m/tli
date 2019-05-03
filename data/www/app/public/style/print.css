@@ -17,3 +17,11 @@ header {
 
 /* Affichage Lien de la balise A */
 a:after{content:" (" attr(href) ") ";font-size:0.8em;font-weight:normal;}
+
+.form.form ul {
+    max-height: initial;
+}
+
+input.input_meridian:not(:checked), input.input_meridian:not(:checked) + label {
+    display: none;
+}

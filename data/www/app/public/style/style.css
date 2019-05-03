@@ -25,3 +25,8 @@ table.pathologies {
         display: block;
     }
 }
+
+/* Page d'accueil */
+.index form.form input {
+    width: 100%;
+}

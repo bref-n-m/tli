@@ -1,6 +1,162 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>
-        Présentation
-    </h1>
+    <div class="row">
+        <div class="col-s-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Présentation</h1>
+                </div>
+                <div class="card-body">
+                    <blockquote>
+                        L’acupuncture ou acuponcture (du latin médical du xviie siècle « acupunctura » formé de acus, « aiguille » et punctura, « piqûre ») est un système thérapeutique dont les origines historiques sont très liées avec la tradition médicale chinoise. L'acupuncture consiste en une stimulation de zones précises de l'épiderme : les « points d’acupuncture ». Les techniques de stimulation des points d’acupuncture sont effectuées avec des moyens divers : des aiguilles le plus souvent, mais aussi d'autres moyens physiques (mécaniques, électriques, magnétiques, thermiques, lumineux) ou physico-chimiques, voire d'autres méthodes alternatives dangereuses (apipuncture, apithérapie avec des piqûres d'abeille)
+                    </blockquote>
+                    <a href="https://fr.wikipedia.org/wiki/Acupuncture">Wikipédia - Acupuncture</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if not user %}
+        <div class="row index">
+            <div class="col-s-12 col-m-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Nouveau compte</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{ path('user.register') }}" class="form">
+                            <div class="row">
+                                <div class="col-l-push-2 col-l-8 col-s-12">
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="first_name">Prénom</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="1" type="text" name="first_name" id="first_name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="last_name">Nom</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="2" type="text" name="last_name" id="last_name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="email">Email</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="3" type="text" name="email" id="email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="password">Mot de passe</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="4" type="password" name="password" id="password"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="password_confirm">Confirmation du mot de passe</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="5" type="password" name="password_confirm" id="password_confirm"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-l-push-2 col-l-8 col-s-12">
+                                    <div class="row">
+                                        <div class="col-s-12 col-m-6">
+                                            <input tabindex="6" type="reset" name="reset" value="Réinitialiser" />
+                                        </div>
+                                        <div class="col-s-12 col-m-6">
+                                            <input tabindex="7" type="submit" name="submit" value="Valider" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-s-12 col-m-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Connexion</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{{ path("login") }}" class="form">
+                            <div class="row">
+                                <div class="col-l-push-2 col-l-8 col-s-12">
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="email">Email</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="8" type="text" name="email" id="email" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-s-12">
+                                            <div class="row">
+                                                <div class="col-s-12">
+                                                    <label for="password">Mot de passe</label>
+                                                </div>
+                                                <div class="col-s-12">
+                                                    <input tabindex="9" type="password" name="password" id="password" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-l-push-2 col-l-8 col-s-12">
+                                    <div class="row">
+                                        <div class="col-s-12 col-m-6">
+                                            <input tabindex="10" type="reset" name="reset" value="Réinitialiser" />
+                                        </div>
+                                        <div class="col-s-12 col-m-6">
+                                            <input tabindex="11" type="submit" name="submit" value="Valider" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
